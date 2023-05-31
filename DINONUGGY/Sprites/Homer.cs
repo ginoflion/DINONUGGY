@@ -8,43 +8,27 @@ using System.Threading.Tasks;
 
 namespace DINONUGGY.Sprites
 {
-    public class Homer
+    public class Homer : Objetos
     {
+        Vector2 origin;
+        public bool isActive;
 
-        private Vector2 Position;
-        private Texture2D Sprite;
-        public IBox Body { get; private set; }
-        Texture2D _DebugTexture;
-        World world;
+        float activePosition { get; }
 
-        public bool isVisible = true;
-
-        public Homer(Texture2D sprite, World world, Texture2D debug_Texture)
+        public Homer(Texture2D texture, Vector2 position) : base(texture, position)
         {
-            Sprite = sprite;
-            Position = new Vector2(800, 0);
-            Position.Y = 380 - Sprite.Height;
-            this.world = world;
-            Body = world.Create(Position.X, Position.Y, Sprite.Width, Sprite.Height);
-            _DebugTexture = debug_Texture;
+             this.texture = texture;
+            this.position = position;
+            height = 80;
+            width = 80;
+            origin = new Vector2(texture.Width / 2, texture.Height / 2);
+            activePosition = position.X;
         }
 
-        public void Update(GameTime gameTime, float worldSpeed)
+       
+        public override void Draw(SpriteBatch spriteBatch)
         {
-            if (Position.X < -Sprite.Width)
-            {
-                isVisible = false;
-                world.Remove(Body);
-            }
-            Position.X -= 30 * worldSpeed * (1 / (float)gameTime.ElapsedGameTime.TotalMilliseconds);
-            Body.Move(Position.X, Position.Y, (collision) => CollisionResponses.None);
-        }
-
-        public void Draw(SpriteBatch spriteBatch, bool debug)
-        {
-            spriteBatch.Draw(Sprite, Position, Color.White);
-            if (debug)
-                spriteBatch.Draw(_DebugTexture, new Rectangle((int)Body.X, (int)Body.Y, (int)Body.Bounds.Width, (int)Body.Bounds.Height), new Color(Color.Blue, 0.5f));
+            spriteBatch.Draw(texture, new Rectangle((int)position.X, (int)position.Y, width, height), null, Color.Gray, 0, origin, SpriteEffects.None, 0f);
         }
 
     }

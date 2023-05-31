@@ -1,78 +1,119 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace DINONUGGY.Sprites
 {
-    public class Player
+    public class Player : Objetos
     {
-        private Vector2 Position;
-        private float Velocity = 0f;
-        private float Gravity = 0.5f;
-        private bool OnGround = false;
-        private bool JumpPressed = false;
-        private float InitY;
-        public IBox Body { get; private set; }
-        Texture2D Sprite;
-        Animation animation;
-        Texture2D _DebugTexture;
+        Vector2 velocity;
+        float speed, gravity, jumpPower;
+        public bool isFacingRight, isDead, isJumping, isInvincible;
+        float angle;
+        public int score;
+        Vector2 origin;
 
-        public Player(Vector2 position, Texture2D sprite, Texture2D animationSheet, World world, Texture2D debug_Texture)
+
+        public override Rectangle HitBox
         {
-            Position.X = position.X;
-            Position.Y = position.Y;
-            InitY = position.Y;
-            Sprite = sprite;
-            Body = world.Create(Position.X + 20, Position.Y, Sprite.Width - 40, Sprite.Height);
-            animation = new Animation(animationSheet, 1, 2, 0.2);
-            _DebugTexture = debug_Texture;
+            get => new Rectangle((int)position.X, (int)position.Y + 8, width, height - 16);
         }
 
-        public void Update(GameTime gameTime)
+        //Contructor
+        public Player(Texture2D texture, Vector2 position) : base(texture, position)
         {
-            if (Position.Y > InitY)
+            speed = 6;
+            gravity = 25;
+            jumpPower = 10;
+            origin = new Vector2(texture.Width / 2, texture.Height / 2);
+            isFacingRight = true;
+            isDead = isInvincible = false;
+        }
+
+        //Update method (is executed every tick)
+        public void Update(double deltaTime, List<Objetos> gameObjects)
+        {
+            Movement(deltaTime);
+            Gravity(deltaTime);
+            
+            position += (velocity * (float)deltaTime) * 60;
+        }
+
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            //spriteBatch.Draw(texture, HitBox, Color.White);
+
+            // Draw with rotarion
+            spriteBatch.Draw(texture, new((int)position.X + 35, (int)position.Y + 35, height, width), null, Color.White, angle, origin, (isFacingRight ? SpriteEffects.None : SpriteEffects.FlipHorizontally), 0f);
+        }
+
+        public void Movement(double deltaTime)
+        {
+            if (!isDead)
             {
-                Position.Y = InitY;
-                Velocity = 0.0f;
-                OnGround = true;
-                animation.Update(gameTime);
+                // Checks if the Player is jumping
+                if (Keyboard.GetState().IsKeyDown(Keys.Space) && !isJumping)
+                {
+                    Jump();
+                }
+                // Remove jumping state so the Player stops flying while holding jump
+                if (Keyboard.GetState().IsKeyUp(Keys.Space)) isJumping = false;
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.Space) && OnGround)
-            {
-                Velocity = -15f;
-                OnGround = false;
-                JumpPressed = true;
-            }
-            if (Keyboard.GetState().IsKeyUp(Keys.Space) && JumpPressed)
-            {
-                if (Velocity < -6f)
-                    Velocity = -6f;
-                JumpPressed = false;
-            }
-            Velocity += Gravity;
-            Position.Y += Velocity;
+
+            velocity.X = speed;
         }
 
-        public IMovement CheckCollision()
+    
+
+     
+
+        public void Gravity(double deltaTime) => velocity.Y += (float)(gravity * deltaTime);
+
+        public bool HasTurned(bool wasFacingRight) => wasFacingRight != isFacingRight;
+
+        private void Jump()
         {
-            var result = Body.Move(Position.X + 20, Position.Y, (collision) => CollisionResponses.None);
-
-            return result;
+            velocity.Y = 0;
+            velocity.Y -= jumpPower;
+            isJumping = true;
+            Sounds.jump.Play(volume: 0.5f, pitch: 0.0f, pan: 0.0f);
         }
 
-        public void Draw(SpriteBatch spriteBatch, State state, bool debug)
+        public void Restart()
         {
-            if (state == State.Game && OnGround == true)
-                animation.Draw(spriteBatch, Position);
-            else
-                spriteBatch.Draw(Sprite, Position, Color.White);
-            if (debug)
-                spriteBatch.Draw(_DebugTexture, new Rectangle((int)Body.X, (int)Body.Y, (int)Body.Bounds.Width, (int)Body.Bounds.Height), new Color(Color.Green, 0.5f));
+            speed = 6;
+            position = new(315, 395);
+            isFacingRight = true;
+            isDead = false;
+            angle = 0;
+            velocity = new(0, 0);
+            isJumping = false;
+            score = 0;
+            isInvincible = false;
         }
+
+        public void Die()
+        {
+            speed = (speed > 0 ? 20 : -20); // Bounces faster (funny)
+            isDead = true;
+            Sounds.death.Play(volume: 0.3f, pitch: 0.0f, pan: 0.0f);
+        }
+
+        public void Score()
+        {
+            score -= -1;
+            Sounds.score.Play(volume: 0.1f, pitch: 0.0f, pan: 0.0f);
+            //if (isInvincible) isInvincible = false;
+        }
+
+       
     }
+}

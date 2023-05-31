@@ -8,30 +8,21 @@ using System.Threading.Tasks;
 
 namespace DINONUGGY.Sprites
 {
-    public class Ground
+    public class Ground : Objetos
     {
-        Texture2D Sprite;
-        Vector2 Position;
 
-        public Ground(Vector2 position, Texture2D sprite)
+        public Ground(Texture2D texture, Vector2 position, int height, int width) : base(texture, position)
         {
-            Sprite = sprite;
-            Position = position;
+            this.texture = texture;
+            this.position = position;
+            this.height = height;
+            this.width = width;
         }
 
-        public void Update(GameTime gameTime, float worldSpeed)
-        {
-            if (Position.X < -Sprite.Width)
-            {
-                float overflow = Sprite.Width + Position.X;
-                Position.X = Sprite.Width + overflow;
-            }
-            Position.X -= 30 * worldSpeed * (1 / (float)gameTime.ElapsedGameTime.TotalMilliseconds);
-        }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Sprite, Position, Color.White);
+            spriteBatch.Draw(texture, HitBox, Color.MintCream);
         }
     }
 }

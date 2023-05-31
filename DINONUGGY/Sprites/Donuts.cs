@@ -12,12 +12,12 @@ namespace DINONUGGY.Sprites
     {
 
         private Vector2 Position;
-        private Texture2D Sprite;
+        private Texture2D texture;
         private float Speed;
         public bool isVisible = true;
         public Donuts(Texture2D sprite, GameTime gameTime)
         {
-            Sprite = sprite;
+            texture = sprite;
             Random rand = new Random(gameTime.TotalGameTime.Seconds);
             Position = new Vector2(800, rand.Next(50, 250));
             Speed = (float)rand.NextDouble() + (float)0.1;
@@ -27,7 +27,7 @@ namespace DINONUGGY.Sprites
         public void Update(GameTime gameTime)
         {
 
-            if (Position.X < -Sprite.Width)
+            if (Position.X < -texture.Width)
             {
                 isVisible = false;
             }
@@ -36,7 +36,7 @@ namespace DINONUGGY.Sprites
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Sprite, Position, Color.LightGoldenrodYellow);
+            spriteBatch.Draw(texture, Position, Color.LightGoldenrodYellow);
         }
 
     }
