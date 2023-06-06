@@ -18,19 +18,15 @@ namespace DINONUGGY
         SpriteBatch spriteBatch;
         Player player;
         Ground ground;
-        Ground ground2;
-        List<Homer> homer;
-        List<Donuts> donut;
+        Homer homer;
+        Donuts donut;
         double DonutTimer = 1000;
         double homerTimer = 2000;
-       
         bool SpaceReleased = false;
         bool SavedHighScore = false;
         
 
-        List<Texture2D> homerTextures;
-        Texture2D donutTexture;
-     
+      
 
         public Game1()
         {
@@ -47,9 +43,11 @@ namespace DINONUGGY
 
         protected override void LoadContent()
         {
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+            ground = new Ground(Content.Load<Texture2D>("Ground"), new Vector2(screenWidth / 2 - 10, screenHeight / 3),100,100);
             player = new Player(Content.Load<Texture2D>("NUGGY"), new Vector2(screenWidth / 2 - 35, screenHeight / 2 - 35));
-
-
+            homer = new Homer(Content.Load<Texture2D>("HOMER"), new Vector2(screenWidth / 2 + 35, screenHeight / 2 +35));
+            donut = new Donuts(Content.Load<Texture2D>("DONUT"), new Vector2(screenWidth / 2 + 50, screenHeight / 2 - 35));
         }
 
         
@@ -62,34 +60,27 @@ namespace DINONUGGY
 
         protected override void Draw(GameTime gameTime)
         {
-            player.Draw(_spriteBatch);
+            GraphicsDevice.Clear(Color.CornflowerBlue);
+            spriteBatch.Begin();
 
+            donut.Draw(spriteBatch);
+            homer.Draw(spriteBatch);
+            ground.Draw(spriteBatch);
+            player.Draw(spriteBatch);
 
+            spriteBatch.End();
             base.Draw(gameTime);
         }
 
-        //Cactus Logic
+        
 
         private void AddCactus(GameTime gameTime)
         {
             
         }
 
-        //Cloud Logic
-        private void AddDonut(GameTime gameTime)
-        {
-            var rand = new Random(gameTime.TotalGameTime.Seconds);
-            DonutTimer -= gameTime.ElapsedGameTime.TotalMilliseconds;
-            if (DonutTimer <= 0 && donut.Count < 3) 
-            {
-                donut.Add(new Donuts(donutTexture, gameTime));
-                DonutTimer = 10000 + rand.NextDouble() * 20000;
-            }
-        }
+        
 
-        private void ResetGame()
-        {
-           
-        }
+        
     }
 }

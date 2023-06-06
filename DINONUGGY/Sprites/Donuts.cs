@@ -8,35 +8,26 @@ using System.Threading.Tasks;
 
 namespace DINONUGGY.Sprites
 {
-    internal class Donuts
+    public class Donuts : Objetos
     {
 
-        private Vector2 Position;
-        private Texture2D texture;
-        private float Speed;
-        public bool isVisible = true;
-        public Donuts(Texture2D sprite, GameTime gameTime)
+        
+        public Donuts(Texture2D texture, Vector2 position):base(texture,position)
         {
-            texture = sprite;
-            Random rand = new Random(gameTime.TotalGameTime.Seconds);
-            Position = new Vector2(800, rand.Next(50, 250));
-            Speed = (float)rand.NextDouble() + (float)0.1;
-            isVisible = true;
+            this.texture = texture;
+            this.position = position;
+            height = 80;
+            width = 80;
         }
 
         public void Update(GameTime gameTime)
         {
 
-            if (Position.X < -texture.Width)
-            {
-                isVisible = false;
-            }
-            Position.X -= Speed;
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, Position, Color.LightGoldenrodYellow);
+            spriteBatch.Draw(texture, HitBox, Color.LightGoldenrodYellow);
         }
 
     }

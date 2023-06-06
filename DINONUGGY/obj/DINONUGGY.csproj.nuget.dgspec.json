@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\gonca\\Desktop\\PROJETOOO\\DINONUGGY\\DINONUGGY\\DINONUGGY.csproj": {}
+    "C:\\Users\\gonca\\Desktop\\Dinonuggy\\DINONUGGY\\DINONUGGY\\DINONUGGY.csproj": {}
   },
   "projects": {
-    "C:\\Users\\gonca\\Desktop\\PROJETOOO\\DINONUGGY\\DINONUGGY\\DINONUGGY.csproj": {
+    "C:\\Users\\gonca\\Desktop\\Dinonuggy\\DINONUGGY\\DINONUGGY\\DINONUGGY.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\gonca\\Desktop\\PROJETOOO\\DINONUGGY\\DINONUGGY\\DINONUGGY.csproj",
+        "projectUniqueName": "C:\\Users\\gonca\\Desktop\\Dinonuggy\\DINONUGGY\\DINONUGGY\\DINONUGGY.csproj",
         "projectName": "DINONUGGY",
-        "projectPath": "C:\\Users\\gonca\\Desktop\\PROJETOOO\\DINONUGGY\\DINONUGGY\\DINONUGGY.csproj",
+        "projectPath": "C:\\Users\\gonca\\Desktop\\Dinonuggy\\DINONUGGY\\DINONUGGY\\DINONUGGY.csproj",
         "packagesPath": "C:\\Users\\gonca\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\gonca\\Desktop\\PROJETOOO\\DINONUGGY\\DINONUGGY\\obj\\",
+        "outputPath": "C:\\Users\\gonca\\Desktop\\Dinonuggy\\DINONUGGY\\DINONUGGY\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\gonca\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -65,7 +65,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }

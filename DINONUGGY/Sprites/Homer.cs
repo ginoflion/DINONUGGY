@@ -10,10 +10,6 @@ namespace DINONUGGY.Sprites
 {
     public class Homer : Objetos
     {
-        Vector2 origin;
-        public bool isActive;
-
-        float activePosition { get; }
 
         public Homer(Texture2D texture, Vector2 position) : base(texture, position)
         {
@@ -21,14 +17,13 @@ namespace DINONUGGY.Sprites
             this.position = position;
             height = 80;
             width = 80;
-            origin = new Vector2(texture.Width / 2, texture.Height / 2);
-            activePosition = position.X;
+          
         }
 
        
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, new Rectangle((int)position.X, (int)position.Y, width, height), null, Color.Gray, 0, origin, SpriteEffects.None, 0f);
+            spriteBatch.Draw(texture,HitBox,Color.White);
         }
 
     }

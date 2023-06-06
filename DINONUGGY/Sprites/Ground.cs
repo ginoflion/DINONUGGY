@@ -10,13 +10,16 @@ namespace DINONUGGY.Sprites
 {
     public class Ground : Objetos
     {
-
+        public override Rectangle HitBox
+        {
+            get => new Rectangle((int)position.X, (int)position.Y + 8, width, height - 16);
+        }
         public Ground(Texture2D texture, Vector2 position, int height, int width) : base(texture, position)
         {
             this.texture = texture;
             this.position = position;
-            this.height = height;
             this.width = width;
+            this.height = height;
         }
 
 

@@ -4,10 +4,10 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/gonca/Desktop/PROJETOOO/DINONUGGY/DINONUGGY/Content/DONUT.png</File>
-    <File>C:/Users/gonca/Desktop/PROJETOOO/DINONUGGY/DINONUGGY/Content/Ground.png</File>
-    <File>C:/Users/gonca/Desktop/PROJETOOO/DINONUGGY/DINONUGGY/Content/HOMER.png</File>
-    <File>C:/Users/gonca/Desktop/PROJETOOO/DINONUGGY/DINONUGGY/Content/NUGGY.png</File>
+    <File>C:/Users/gonca/Desktop/Dinonuggy/DINONUGGY/DINONUGGY/Content/DONUT.png</File>
+    <File>C:/Users/gonca/Desktop/Dinonuggy/DINONUGGY/DINONUGGY/Content/Ground.png</File>
+    <File>C:/Users/gonca/Desktop/Dinonuggy/DINONUGGY/DINONUGGY/Content/HOMER.png</File>
+    <File>C:/Users/gonca/Desktop/Dinonuggy/DINONUGGY/DINONUGGY/Content/NUGGY.png</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />

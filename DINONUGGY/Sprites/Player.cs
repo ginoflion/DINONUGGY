@@ -15,11 +15,9 @@ namespace DINONUGGY.Sprites
     public class Player : Objetos
     {
         Vector2 velocity;
-        float speed, gravity, jumpPower;
-        public bool isFacingRight, isDead, isJumping, isInvincible;
-        float angle;
+        float speed, gravity;
+        public bool  isDead, isJumping, isInvincible;
         public int score;
-        Vector2 origin;
 
 
         public override Rectangle HitBox
@@ -28,13 +26,10 @@ namespace DINONUGGY.Sprites
         }
 
         //Contructor
-        public Player(Texture2D texture, Vector2 position) : base(texture, position)
+        public Player(Texture2D texture, Vector2 position ) : base(texture, position)
         {
             speed = 6;
             gravity = 25;
-            jumpPower = 10;
-            origin = new Vector2(texture.Width / 2, texture.Height / 2);
-            isFacingRight = true;
             isDead = isInvincible = false;
         }
 
@@ -49,22 +44,18 @@ namespace DINONUGGY.Sprites
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            //spriteBatch.Draw(texture, HitBox, Color.White);
-
-            // Draw with rotarion
-            spriteBatch.Draw(texture, new((int)position.X + 35, (int)position.Y + 35, height, width), null, Color.White, angle, origin, (isFacingRight ? SpriteEffects.None : SpriteEffects.FlipHorizontally), 0f);
+           
+            spriteBatch.Draw(texture, HitBox, Color.White);
         }
 
         public void Movement(double deltaTime)
         {
             if (!isDead)
             {
-                // Checks if the Player is jumping
                 if (Keyboard.GetState().IsKeyDown(Keys.Space) && !isJumping)
                 {
                     Jump();
                 }
-                // Remove jumping state so the Player stops flying while holding jump
                 if (Keyboard.GetState().IsKeyUp(Keys.Space)) isJumping = false;
             }
 
@@ -77,43 +68,14 @@ namespace DINONUGGY.Sprites
 
         public void Gravity(double deltaTime) => velocity.Y += (float)(gravity * deltaTime);
 
-        public bool HasTurned(bool wasFacingRight) => wasFacingRight != isFacingRight;
 
         private void Jump()
         {
             velocity.Y = 0;
-            velocity.Y -= jumpPower;
             isJumping = true;
-            Sounds.jump.Play(volume: 0.5f, pitch: 0.0f, pan: 0.0f);
         }
 
-        public void Restart()
-        {
-            speed = 6;
-            position = new(315, 395);
-            isFacingRight = true;
-            isDead = false;
-            angle = 0;
-            velocity = new(0, 0);
-            isJumping = false;
-            score = 0;
-            isInvincible = false;
-        }
-
-        public void Die()
-        {
-            speed = (speed > 0 ? 20 : -20); // Bounces faster (funny)
-            isDead = true;
-            Sounds.death.Play(volume: 0.3f, pitch: 0.0f, pan: 0.0f);
-        }
-
-        public void Score()
-        {
-            score -= -1;
-            Sounds.score.Play(volume: 0.1f, pitch: 0.0f, pan: 0.0f);
-            //if (isInvincible) isInvincible = false;
-        }
-
+       
        
     }
 }
