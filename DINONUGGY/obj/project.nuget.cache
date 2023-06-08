@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "EbnnuspPf7emid8AA2D+hd4jV/S0rnUHdsmFwB2P/h4pZOke5kpPc8oas1+bF5MhQH5Yqc3I2tOTC8KMTqO1BA==",
+  "dgSpecHash": "zsSIi6m/a4yxN9Hz9Set1MjI10eVMuHMHBwq7XZM25FrVZp7aHeCy7TGNH5mH96Kq8MOiIDqUEbkKsyMiRdatg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\gonca\\Desktop\\Dinonuggy\\DINONUGGY\\DINONUGGY\\DINONUGGY.csproj",
+  "projectFilePath": "C:\\Users\\gonca\\Desktop\\PROJETOOO\\DINONUGGY\\DINONUGGY\\DINONUGGY.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\gonca\\.nuget\\packages\\monogame.content.builder.task\\3.8.1.303\\monogame.content.builder.task.3.8.1.303.nupkg.sha512",
     "C:\\Users\\gonca\\.nuget\\packages\\monogame.framework.desktopgl\\3.8.1.303\\monogame.framework.desktopgl.3.8.1.303.nupkg.sha512"

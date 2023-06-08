@@ -20,8 +20,6 @@ namespace DINONUGGY
         Ground ground;
         Homer homer;
         Donuts donut;
-        double DonutTimer = 1000;
-        double homerTimer = 2000;
         bool SpaceReleased = false;
         bool SavedHighScore = false;
         
@@ -44,17 +42,18 @@ namespace DINONUGGY
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            ground = new Ground(Content.Load<Texture2D>("Ground"), new Vector2(screenWidth / 2 - 10, screenHeight / 3),100,100);
-            player = new Player(Content.Load<Texture2D>("NUGGY"), new Vector2(screenWidth / 2 - 35, screenHeight / 2 - 35));
+            ground = new Ground(Content.Load<Texture2D>("Ground"), new Vector2(0, 0), screenWidth, 50);
+            player = new Player(Content.Load<Texture2D>("NUGGY"), new Vector2(screenWidth/ 4 - 35, screenHeight / 2 - 35));
             homer = new Homer(Content.Load<Texture2D>("HOMER"), new Vector2(screenWidth / 2 + 35, screenHeight / 2 +35));
-            donut = new Donuts(Content.Load<Texture2D>("DONUT"), new Vector2(screenWidth / 2 + 50, screenHeight / 2 - 35));
+            donut = new Donuts(Content.Load<Texture2D>("DONUT"), new Vector2(screenWidth / 2 + 50, screenHeight / 6));
         }
 
         
 
         protected override void Update(GameTime gameTime)
         {
-          
+           
+            player.Update(gameTime);
             base.Update(gameTime);
         }
 

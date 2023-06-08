@@ -18,8 +18,10 @@ namespace DINONUGGY.Sprites
         float speed, gravity;
         public bool  isDead, isJumping, isInvincible;
         public int score;
-
-
+        private bool keysReleased = true;
+        private Point position;
+        public Point Position => position;
+        
         public override Rectangle HitBox
         {
             get => new Rectangle((int)position.X, (int)position.Y + 8, width, height - 16);
@@ -34,13 +36,36 @@ namespace DINONUGGY.Sprites
         }
 
         //Update method (is executed every tick)
-        public void Update(double deltaTime, List<Objetos> gameObjects)
-        {
-            Movement(deltaTime);
-            Gravity(deltaTime);
-            
-            position += (velocity * (float)deltaTime) * 60;
-        }
+        
+            public void Update(GameTime gameTime)
+            {
+                Point lastPosition = position;
+
+                KeyboardState kState = Keyboard.GetState();
+
+                keysReleased = false;
+            if ((kState.IsKeyDown(Keys.A)) || (kState.IsKeyDown(Keys.Left)))
+            {
+                position.X--;
+
+            }
+            else if ((kState.IsKeyDown(Keys.W)) || (kState.IsKeyDown(Keys.Up)))
+            {
+                position.Y--;
+            }
+            else if ((kState.IsKeyDown(Keys.S)) || (kState.IsKeyDown(Keys.Down)))
+            {
+                position.Y++;
+            }
+            else if ((kState.IsKeyDown(Keys.D)) || (kState.IsKeyDown(Keys.Right)))
+            {
+                position.X++;
+            }
+            else keysReleased = true;
+
+
+            } 
+        
 
         public override void Draw(SpriteBatch spriteBatch)
         {
@@ -48,20 +73,7 @@ namespace DINONUGGY.Sprites
             spriteBatch.Draw(texture, HitBox, Color.White);
         }
 
-        public void Movement(double deltaTime)
-        {
-            if (!isDead)
-            {
-                if (Keyboard.GetState().IsKeyDown(Keys.Space) && !isJumping)
-                {
-                    Jump();
-                }
-                if (Keyboard.GetState().IsKeyUp(Keys.Space)) isJumping = false;
-            }
-
-            velocity.X = speed;
-        }
-
+      
     
 
      
