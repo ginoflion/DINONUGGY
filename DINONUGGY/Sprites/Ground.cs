@@ -12,7 +12,7 @@ namespace DINONUGGY.Sprites
     {
         public override Rectangle HitBox
         {
-            get => new Rectangle((int)position.X, (int)position.Y + 8, width, height - 16);
+            get => new Rectangle((int)position.X, (int)position.Y , width, height );
         }
         public Ground(Texture2D texture, Vector2 position, int height, int width) : base(texture, position)
         {

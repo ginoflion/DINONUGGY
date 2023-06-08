@@ -14,7 +14,7 @@ namespace DINONUGGY.Sprites
     public class Objetos
     {
         public Texture2D texture; 
-        Vector2 velocity;
+        public Vector2 velocity;
         public Vector2 position;
         public int height = 70, width = 70;
 
@@ -38,7 +38,13 @@ namespace DINONUGGY.Sprites
         }
 
        
-     
+        protected bool IsTouchingLeft(Objetos gameObject)
+        {
+            return this.HitBox.Right + this.velocity.X > gameObject.HitBox.Left &&
+         this.HitBox.Left < gameObject.HitBox.Left &&
+         this.HitBox.Bottom > gameObject.HitBox.Top &&
+         this.HitBox.Top < gameObject.HitBox.Bottom;
+        }
         protected bool IsTouchingRight(Objetos gameObject)
         {
             return this.HitBox.Left + this.velocity.X < gameObject.HitBox.Right &&

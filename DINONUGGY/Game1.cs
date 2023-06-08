@@ -14,27 +14,29 @@ namespace DINONUGGY
     {
         public static int screenWidth = 1280;
         public static int screenHeight = 720;
-        GraphicsDeviceManager graphics;
+        GraphicsDeviceManager _graphics;
         SpriteBatch spriteBatch;
         Player player;
         Ground ground;
         Homer homer;
         Donuts donut;
-        bool SpaceReleased = false;
-        bool SavedHighScore = false;
-        
+        List<Objetos> objetos = new List<Objetos>();
 
       
 
         public Game1()
         {
-            graphics = new GraphicsDeviceManager(this);
+            _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
 
         protected override void Initialize()
         {
             this.IsMouseVisible = true;
+            _graphics.PreferredBackBufferHeight = screenHeight; //definição da altura
+            _graphics.PreferredBackBufferWidth = screenWidth; //definição da largura
+            _graphics.ApplyChanges();
+
 
             base.Initialize();
         }
@@ -42,18 +44,20 @@ namespace DINONUGGY
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            ground = new Ground(Content.Load<Texture2D>("Ground"), new Vector2(0, 0), screenWidth, 50);
+            ground = new Ground(Content.Load<Texture2D>("Ground"), new Vector2(0, screenHeight - 100),200, screenWidth);
             player = new Player(Content.Load<Texture2D>("NUGGY"), new Vector2(screenWidth/ 4 - 35, screenHeight / 2 - 35));
             homer = new Homer(Content.Load<Texture2D>("HOMER"), new Vector2(screenWidth / 2 + 35, screenHeight / 2 +35));
             donut = new Donuts(Content.Load<Texture2D>("DONUT"), new Vector2(screenWidth / 2 + 50, screenHeight / 6));
+            objetos.Add(homer); objetos.Add(ground);
         }
 
         
 
         protected override void Update(GameTime gameTime)
         {
-           
-            player.Update(gameTime);
+            double deltaTime = gameTime.ElapsedGameTime.TotalSeconds;
+
+            player.Update(deltaTime,objetos);
             base.Update(gameTime);
         }
 
@@ -73,12 +77,7 @@ namespace DINONUGGY
 
         
 
-        private void AddCactus(GameTime gameTime)
-        {
-            
-        }
-
-        
+       
 
         
     }

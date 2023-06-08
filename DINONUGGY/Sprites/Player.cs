@@ -14,57 +14,43 @@ namespace DINONUGGY.Sprites
 {
     public class Player : Objetos
     {
-        Vector2 velocity;
         float speed, gravity;
-        public bool  isDead, isJumping, isInvincible;
+        public bool  isDead, isJumping;
         public int score;
-        private bool keysReleased = true;
-        private Point position;
-        public Point Position => position;
         
+       
         public override Rectangle HitBox
         {
-            get => new Rectangle((int)position.X, (int)position.Y + 8, width, height - 16);
+            get => new Rectangle((int)position.X, (int)position.Y , width, height );
         }
 
         //Contructor
         public Player(Texture2D texture, Vector2 position ) : base(texture, position)
         {
-            speed = 6;
-            gravity = 25;
-            isDead = isInvincible = false;
+            speed = 10;
+            gravity = 100;
+            isDead  = false;
         }
 
-        //Update method (is executed every tick)
-        
-            public void Update(GameTime gameTime)
-            {
-                Point lastPosition = position;
 
-                KeyboardState kState = Keyboard.GetState();
+        public void Update(double deltaTime, List<Objetos> gameObjects)
+        {
 
-                keysReleased = false;
+            Gravity(deltaTime);
+            HandleCollision(gameObjects);
+            KeyboardState kState = Keyboard.GetState();
+
             if ((kState.IsKeyDown(Keys.A)) || (kState.IsKeyDown(Keys.Left)))
             {
-                position.X--;
-
+                velocity.X -= speed;        
             }
-            else if ((kState.IsKeyDown(Keys.W)) || (kState.IsKeyDown(Keys.Up)))
+            if ((kState.IsKeyDown(Keys.D)) || (kState.IsKeyDown(Keys.Right)))
             {
-                position.Y--;
+                velocity.X += speed;
             }
-            else if ((kState.IsKeyDown(Keys.S)) || (kState.IsKeyDown(Keys.Down)))
-            {
-                position.Y++;
-            }
-            else if ((kState.IsKeyDown(Keys.D)) || (kState.IsKeyDown(Keys.Right)))
-            {
-                position.X++;
-            }
-            else keysReleased = true;
-
-
-            } 
+            position += velocity * (float)deltaTime;
+        }
+          
         
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -73,10 +59,54 @@ namespace DINONUGGY.Sprites
             spriteBatch.Draw(texture, HitBox, Color.White);
         }
 
-      
-    
+        public void HandleCollision(List<Objetos> gameObjects)
+        {
+            foreach (Objetos gameObject in gameObjects)
+            {
+                if ((velocity.Y > 0 && IsTouchingTop(gameObject)) ||
+                    (velocity.Y < 0 && IsTouchingBottom(gameObject)))
+                {
+                    if (gameObject is Ground)
+                    {
+                        velocity.Y = 0;
+                       
+                    }
+                    if (gameObject is Homer )
+                    {
+                        velocity.Y = 0;
+                        if (!isDead) Die();
+                    }
+                  
+                }
+                // Checar Colisões da esquerda e direita
+                if ((velocity.X < 0 && IsTouchingRight(gameObject)) ||
+                    (velocity.X > 0 && IsTouchingLeft(gameObject)))
+                {
+                    if (gameObject is Ground)
+                    {
+                        velocity.X = 0;
+                        if (!isDead)
+                        {
+                            //Score();
+                        }
+                    }
+                    if (gameObject is Homer )
+                    {
+                        velocity.X = 0;
+                        if (!isDead) Die();
+                    }
+                   
+                }
 
-     
+            }
+        }
+
+
+        public void Die()
+        {
+            speed = 0;
+            isDead = true;
+        }
 
         public void Gravity(double deltaTime) => velocity.Y += (float)(gravity * deltaTime);
 
