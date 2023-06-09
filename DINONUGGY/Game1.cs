@@ -21,7 +21,7 @@ namespace DINONUGGY
         Homer homer;
         Donuts donut;
         List<Objetos> objetos = new List<Objetos>();
-
+        Camera cam;
       
 
         public Game1()
@@ -48,7 +48,9 @@ namespace DINONUGGY
             player = new Player(Content.Load<Texture2D>("NUGGY"), new Vector2(screenWidth/ 4 - 35, screenHeight / 2 - 35));
             homer = new Homer(Content.Load<Texture2D>("HOMER"), new Vector2(screenWidth / 2 + 35, screenHeight / 2 +35));
             donut = new Donuts(Content.Load<Texture2D>("DONUT"), new Vector2(screenWidth / 2 + 50, screenHeight / 6));
-            objetos.Add(homer); objetos.Add(ground);
+            objetos.Add(homer); 
+            objetos.Add(ground);
+            cam = new Camera();
         }
 
         
@@ -56,8 +58,9 @@ namespace DINONUGGY
         protected override void Update(GameTime gameTime)
         {
             double deltaTime = gameTime.ElapsedGameTime.TotalSeconds;
-
+           
             player.Update(deltaTime,objetos);
+            cam.Follow(player);
             base.Update(gameTime);
         }
 

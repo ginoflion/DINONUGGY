@@ -48,6 +48,14 @@ namespace DINONUGGY.Sprites
             {
                 velocity.X += speed;
             }
+            if ((kState.IsKeyDown(Keys.Space)))
+            {
+                Jump();
+            }
+            if ((kState.IsKeyUp(Keys.Space)))
+            {
+                isJumping = false;
+            }
             position += velocity * (float)deltaTime;
         }
           
@@ -113,11 +121,13 @@ namespace DINONUGGY.Sprites
 
         private void Jump()
         {
-            velocity.Y = 0;
+
+            velocity.Y -= 10;
             isJumping = true;
+
         }
 
-       
-       
+
+
     }
 }
