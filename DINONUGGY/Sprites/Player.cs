@@ -15,7 +15,7 @@ namespace DINONUGGY.Sprites
     public class Player : Objetos
     {
         float speed, gravity;
-        public bool  isDead, isJumping;
+        public bool  isDead, isMidair;
         public int score;
         
        
@@ -52,10 +52,6 @@ namespace DINONUGGY.Sprites
             {
                 Jump();
             }
-            if ((kState.IsKeyUp(Keys.Space)))
-            {
-                isJumping = false;
-            }
             position += velocity * (float)deltaTime;
         }
           
@@ -77,6 +73,7 @@ namespace DINONUGGY.Sprites
                     if (gameObject is Ground)
                     {
                         velocity.Y = 0;
+                        isMidair = false;
                        
                     }
                     if (gameObject is Homer )
@@ -116,14 +113,19 @@ namespace DINONUGGY.Sprites
             isDead = true;
         }
 
-        public void Gravity(double deltaTime) => velocity.Y += (float)(gravity * deltaTime);
+        public void Gravity(double deltaTime) {
+            if (isMidair) {
+                velocity.Y += (float)(gravity * deltaTime);
+            }
+                }
+
 
 
         private void Jump()
         {
 
             velocity.Y -= 10;
-            isJumping = true;
+            isMidair = true;
 
         }
 
