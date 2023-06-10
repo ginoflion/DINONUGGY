@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Reflection.Metadata;
@@ -17,11 +18,11 @@ namespace DINONUGGY.Sprites
         float speed, gravity;
         public bool  isDead, isMidair;
         public int score;
-        
-       
+
+
         public override Rectangle HitBox
         {
-            get => new Rectangle((int)position.X, (int)position.Y , width, height );
+            get => new Rectangle((int)position.X, (int)position.Y, width, height);
         }
 
         //Contructor
@@ -35,7 +36,7 @@ namespace DINONUGGY.Sprites
 
         public void Update(double deltaTime, List<Objetos> gameObjects)
         {
-
+            isMidair = true;
             Gravity(deltaTime);
             HandleCollision(gameObjects);
             KeyboardState kState = Keyboard.GetState();
@@ -74,7 +75,6 @@ namespace DINONUGGY.Sprites
                     {
                         velocity.Y = 0;
                         isMidair = false;
-                       
                     }
                     if (gameObject is Homer )
                     {
@@ -83,7 +83,7 @@ namespace DINONUGGY.Sprites
                     }
                   
                 }
-                // Checar Colisões da esquerda e direita
+
                 if ((velocity.X < 0 && IsTouchingRight(gameObject)) ||
                     (velocity.X > 0 && IsTouchingLeft(gameObject)))
                 {
@@ -117,16 +117,17 @@ namespace DINONUGGY.Sprites
             if (isMidair) {
                 velocity.Y += (float)(gravity * deltaTime);
             }
-                }
-
-
+        }
 
         private void Jump()
         {
-
-            velocity.Y -= 10;
-            isMidair = true;
-
+            if (!isMidair)
+            {
+                velocity.Y -= 10;
+                isMidair = true;
+            }
+            
+            
         }
 
 

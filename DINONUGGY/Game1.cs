@@ -22,7 +22,7 @@ namespace DINONUGGY
         Donuts donut;
         List<Objetos> objetos = new List<Objetos>();
         Camera cam;
-      
+        Texture2D texture;
 
         public Game1()
         {
@@ -33,8 +33,8 @@ namespace DINONUGGY
         protected override void Initialize()
         {
             this.IsMouseVisible = true;
-            _graphics.PreferredBackBufferHeight = screenHeight; //definição da altura
-            _graphics.PreferredBackBufferWidth = screenWidth; //definição da largura
+            _graphics.PreferredBackBufferHeight = screenHeight; 
+            _graphics.PreferredBackBufferWidth = screenWidth; 
             _graphics.ApplyChanges();
 
 
@@ -43,12 +43,14 @@ namespace DINONUGGY
 
         protected override void LoadContent()
         {
+            
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            ground = new Ground(Content.Load<Texture2D>("Ground"), new Vector2(0, screenHeight - 100),200, screenWidth);
+            ground = new Ground(Content.Load<Texture2D>("Ground"), new Vector2(0, screenHeight-100),100, screenWidth);
             player = new Player(Content.Load<Texture2D>("NUGGY"), new Vector2(screenWidth/ 4 - 35, screenHeight / 2 - 35));
             homer = new Homer(Content.Load<Texture2D>("HOMER"), new Vector2(screenWidth / 2 + 35, screenHeight / 2 +35));
             donut = new Donuts(Content.Load<Texture2D>("DONUT"), new Vector2(screenWidth / 2 + 50, screenHeight / 6));
-            objetos.Add(homer); 
+            
+            objetos.Add(homer);
             objetos.Add(ground);
             cam = new Camera();
         }
@@ -68,11 +70,11 @@ namespace DINONUGGY
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
-
-            donut.Draw(spriteBatch);
-            homer.Draw(spriteBatch);
             ground.Draw(spriteBatch);
             player.Draw(spriteBatch);
+            donut.Draw(spriteBatch);
+            homer.Draw(spriteBatch);
+           
 
             spriteBatch.End();
             base.Draw(gameTime);
