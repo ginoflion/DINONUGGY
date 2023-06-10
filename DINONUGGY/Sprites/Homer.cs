@@ -11,6 +11,7 @@ namespace DINONUGGY.Sprites
     public class Homer : Objetos
     {
 
+        
         public Homer(Texture2D texture, Vector2 position) : base(texture, position)
         {
              this.texture = texture;
