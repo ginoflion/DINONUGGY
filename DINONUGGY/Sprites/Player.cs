@@ -29,7 +29,7 @@ namespace DINONUGGY.Sprites
         public Player(Texture2D texture, Vector2 position ) : base(texture, position)
         {
             hp = 100;
-            speed = 10;
+            speed = 150;
             gravity = 150;
             isDead  = false;
             
@@ -46,12 +46,12 @@ namespace DINONUGGY.Sprites
 
             if (kState.IsKeyDown(Keys.A) || kState.IsKeyDown(Keys.Left)) 
             {
-                velocity.X -= speed;
+                velocity.X = -speed;
                 isKeyPressed = true;
             }
             if (kState.IsKeyDown(Keys.D) || kState.IsKeyDown(Keys.Right))
             {
-                velocity.X += speed;
+                velocity.X = speed;
 
                 isKeyPressed = true;
             }

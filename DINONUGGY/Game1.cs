@@ -64,9 +64,11 @@ namespace DINONUGGY
             double deltaTime = gameTime.ElapsedGameTime.TotalSeconds;
             gameTimeElapsed += gameTime.ElapsedGameTime;
             player.Update(deltaTime,objetos);
+            homer.Update(deltaTime);
             ScoreManager.ScoreManager.UpdateScore(gameTime);
             cam.Follow(player);
             base.Update(gameTime);
+            
         }
 
         protected override void Draw(GameTime gameTime)
