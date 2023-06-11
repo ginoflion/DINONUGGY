@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System;
 using DINONUGGY.Sprites;
-using DINONUGGY.State;
 
 namespace DINONUGGY
 {
@@ -44,7 +43,7 @@ namespace DINONUGGY
 
         protected override void LoadContent()
         {
-            
+          
             spriteBatchPlayer = new SpriteBatch(GraphicsDevice);
             spriteBatchUI= new SpriteBatch(GraphicsDevice);
             ground = new Ground(Content.Load<Texture2D>("Ground"), new Vector2(0, screenHeight-100),100, screenWidth*2);
@@ -52,6 +51,7 @@ namespace DINONUGGY
             homer = new Homer(Content.Load<Texture2D>("HOMER"), new Vector2(screenWidth / 2 + 35, screenHeight / 2 +35));
             donut = new Donuts(Content.Load<Texture2D>("DONUT"), new Vector2(screenWidth -300, 0));
             _font = Content.Load<SpriteFont>("Fonte");
+            Sounds.LoadSounds(Content);
             objetos.Add(homer);
             objetos.Add(ground);
             
@@ -74,7 +74,7 @@ namespace DINONUGGY
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatchPlayer.Begin(transformMatrix: cam.Transform);
             spriteBatchUI.Begin();
-
+            spriteBatchUI.DrawString(_font, "HP:" + player.hp , new Vector2(10, 50), Color.White);
             spriteBatchUI.DrawString(_font,   ScoreManager.ScoreManager.Score.ToString(), new Vector2(screenWidth-220,20), Color.White);
             spriteBatchUI.DrawString(_font, "Tempo de Jogo:" + gameTimeElapsed.TotalSeconds.ToString("0.00")  +  " segundos", new Vector2(10,10), Color.White);
             ground.Draw(spriteBatchPlayer);

@@ -38,9 +38,9 @@ namespace DINONUGGY.Sprites
         }
 
 
-        protected bool CheckCollision(Objetos obj1, Objetos obj2)
+        protected bool CheckCollision( Objetos obj2)
         {
-            return obj1.HitBox.Intersects(obj2.HitBox);
+            return this.HitBox.Intersects(obj2.HitBox);
         }
 
 

@@ -98,3 +98,5 @@ C:\Users\Miguel\Source\Repos\DINONUGGY\DINONUGGY\obj\Debug\net6.0\DINONUGGY.pdb
 C:\Users\Miguel\Source\Repos\DINONUGGY\DINONUGGY\obj\Debug\net6.0\DINONUGGY.genruntimeconfig.cache
 C:\Users\Miguel\Source\Repos\DINONUGGY\DINONUGGY\obj\Debug\net6.0\ref\DINONUGGY.dll
 C:\Users\gonca\Desktop\PROJETOOO\DINONUGGY\DINONUGGY\bin\Debug\net6.0\Content\Fonte.xnb
+C:\Users\gonca\Desktop\PROJETOOO\DINONUGGY\DINONUGGY\bin\Debug\net6.0\Content\death.xnb
+C:\Users\gonca\Desktop\PROJETOOO\DINONUGGY\DINONUGGY\bin\Debug\net6.0\Content\damage.xnb

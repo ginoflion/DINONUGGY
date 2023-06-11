@@ -16,8 +16,8 @@ namespace DINONUGGY.Sprites
     public class Player : Objetos
     {
         float speed, gravity;
-        public bool  isDead, isMidair;
-        public int score;
+        public bool  isDead, isMidair, isColliding;
+        public int hp;
 
 
         public override Rectangle HitBox
@@ -28,6 +28,7 @@ namespace DINONUGGY.Sprites
         //Contructor
         public Player(Texture2D texture, Vector2 position ) : base(texture, position)
         {
+            hp = 100;
             speed = 10;
             gravity = 150;
             isDead  = false;
@@ -65,7 +66,10 @@ namespace DINONUGGY.Sprites
             {
                 velocity.X = 0;
             }
-                
+            if (hp <= 0)
+            {
+                Die();
+            }
            
             position += velocity* (float)deltaTime;
         }
@@ -77,29 +81,69 @@ namespace DINONUGGY.Sprites
            
             spriteBatch.Draw(texture, HitBox, Color.White);
         }
-      
 
+
+       
         public void HandleCollision(List<Objetos> gameObjects)
         {
+            List<Objetos> objectsToRemove = new List<Objetos>();
             foreach (Objetos gameObject in gameObjects)
             {
-                if (velocity.Y > 0 && CheckCollision(this, gameObject))
+                if (CheckCollision(gameObject))
                 {
                     if (gameObject is Ground)
                     {
-                        velocity.Y = 0;
-                        isMidair = false;
+                        if (velocity.Y > 0)
+                        {
+                           
+                            velocity.Y = 0;
+                            isMidair = false;
+                        }
+                        else if (velocity.Y < 0)
+                        {
+                           
+                            velocity.Y = 0;
+                        }
+                        else if (velocity.X > 0)
+                        {
+                            float overlap = this.HitBox.Right - gameObject.HitBox.Left;
+                            position.X -= overlap;
+                            velocity.X = 0;
+                        }
+                        else if (velocity.X < 0)
+                        {
+                            float overlap = gameObject.HitBox.Right - this.HitBox.Left;
+                            position.X += overlap;
+                            velocity.X = 0;
+                        }
+                    }
+
+                    if (gameObject is Homer && !isColliding)
+                    {
+                        isColliding = true;
+                        velocity.X -= 30;
+                        hp = hp - 25;
+                        Sounds.damage.Play(volume: 0.3f, pitch: 0.0f, pan: 0.0f);
+                        objectsToRemove.Add(gameObject);
                     }
                 }
+               
+            }
+            foreach (Objetos objToRemove in objectsToRemove)
+            {
+                gameObjects.Remove(objToRemove);
             }
         }
-        
+
 
 
         public void Die()
         {
-            speed = 0;
-            isDead = true;
+        
+                speed = 0;
+                isDead = true;
+                Sounds.death.Play(volume: 0.3f, pitch: 0.0f, pan: 0.0f);
+
         }
 
         public void Gravity(double deltaTime) {
@@ -112,7 +156,7 @@ namespace DINONUGGY.Sprites
         {
             if (!isMidair)
             {
-                velocity.Y -= 100;
+                velocity.Y -= 200;
                 isMidair = true;
             }
 

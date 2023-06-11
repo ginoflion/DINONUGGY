@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,10 +8,16 @@ using System.Threading.Tasks;
 
 namespace DINONUGGY
 {
-    public class Sounds
+    public static class Sounds
     {
-        public static SoundEffect death;
+        public static SoundEffect death,damage;
         public static SoundEffect jump;
-        public static SoundEffect score;
+
+        public static void LoadSounds(ContentManager Content)
+        {
+            death = Content.Load<SoundEffect>("death");
+            damage = Content.Load<SoundEffect>("damage");
+
+        }
     }
 }
