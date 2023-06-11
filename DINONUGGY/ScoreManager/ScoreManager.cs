@@ -10,20 +10,21 @@ namespace DINONUGGY.ScoreManager
 {
     public static class ScoreManager
     {
-        public static int HighScore { get; set; }
-        public static int Score { get; set; }
-        private static double ScoreTimer = 100;
+        public static int HighScore { get; private set; }
+        public static int Score { get; private set; }
+        private static double ScoreTimer = 0;
+        private static DateTime StartTime;
 
-        private static string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "DinoRunGame");
+        private static string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "DINONUGGY");
 
         public static void InitializeHighScore()
         {
             Directory.CreateDirectory(path);
-            if (File.Exists(path + @"\score.txt"))
+            if (File.Exists(Path.Combine(path, "score.txt")))
             {
                 try
                 {
-                    HighScore = int.Parse(File.ReadLines(path + @"\score.txt").First());
+                    HighScore = int.Parse(File.ReadLines(Path.Combine(path, "score.txt")).First());
                 }
                 catch
                 {
@@ -32,34 +33,41 @@ namespace DINONUGGY.ScoreManager
             }
             else
             {
-                var file = File.Create(path + @"\score.txt");
+                var file = File.Create(Path.Combine(path, "score.txt"));
                 file.Close();
                 HighScore = 0;
             }
         }
 
-        public static float UpdateScore(GameTime gameTime, float worldSpeed)
+        public static void StartGame()
         {
-            ScoreTimer -= gameTime.ElapsedGameTime.TotalMilliseconds;
-            if (ScoreTimer <= 0)
-            {
-                Score++;
-                if (Score % 100 == 0 && worldSpeed < 10)
-                    worldSpeed += 0.5f;
+            Score = 0;
+            StartTime = DateTime.Now;
+            ScoreTimer = 0;
+        }
 
-                ScoreTimer = 100;
+        public static void UpdateScore(GameTime gameTime)
+        {
+            double elapsedSeconds = (DateTime.Now - StartTime).TotalSeconds;
+            ScoreTimer += gameTime.ElapsedGameTime.TotalMilliseconds;
+
+            if (ScoreTimer >= 1)
+            {
+                Score = (int)(elapsedSeconds * 7); 
+                ScoreTimer = 0;
             }
-            return worldSpeed;
         }
 
         public static int SetHighScore()
         {
             if (Score > HighScore)
             {
-                File.WriteAllText(path + @"\score.txt", Score.ToString());
+                File.WriteAllText(Path.Combine(path, "score.txt"), Score.ToString());
                 HighScore = Score;
             }
             return HighScore;
         }
     }
+
+
 }

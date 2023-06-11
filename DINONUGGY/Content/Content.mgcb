@@ -25,6 +25,13 @@
 /processorParam:TextureFormat=Color
 /build:DONUT.png
 
+#begin Fonte.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Fonte.spritefont
+
 #begin Ground.png
 /importer:TextureImporter
 /processor:TextureProcessor

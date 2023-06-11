@@ -22,14 +22,14 @@ namespace DINONUGGY.Sprites
 
         public override Rectangle HitBox
         {
-            get => new Rectangle((int)position.X, (int)position.Y, height, width);
+            get => new Rectangle((int)position.X, (int)position.Y, height+10, width);
         }
 
         //Contructor
         public Player(Texture2D texture, Vector2 position ) : base(texture, position)
         {
             speed = 10;
-            gravity = 100;
+            gravity = 150;
             isDead  = false;
             
         }
@@ -39,33 +39,35 @@ namespace DINONUGGY.Sprites
         {
             isMidair = true;
             KeyboardState kState = Keyboard.GetState();
-            bool isMovementKeyPressed = false;
-
+            bool isKeyPressed=false;
             Gravity(deltaTime);
             HandleCollision(gameObjects);
 
             if (kState.IsKeyDown(Keys.A) || kState.IsKeyDown(Keys.Left)) 
             {
                 velocity.X -= speed;
-                isMovementKeyPressed = true;
+                isKeyPressed = true;
             }
             if (kState.IsKeyDown(Keys.D) || kState.IsKeyDown(Keys.Right))
             {
                 velocity.X += speed;
-                isMovementKeyPressed = true;
+
+                isKeyPressed = true;
             }
             if (kState.IsKeyDown(Keys.Space))
             {
                 Jump();
-                isMovementKeyPressed = true;
-            }
 
-            if (!isMovementKeyPressed)
+                isKeyPressed = true;
+
+            }
+            if(!isKeyPressed)
             {
                 velocity.X = 0;
             }
-
-            position += velocity * (float)deltaTime;
+                
+           
+            position += velocity* (float)deltaTime;
         }
 
 
@@ -113,8 +115,7 @@ namespace DINONUGGY.Sprites
                 velocity.Y -= 100;
                 isMidair = true;
             }
-            
-            
+
         }
 
 
