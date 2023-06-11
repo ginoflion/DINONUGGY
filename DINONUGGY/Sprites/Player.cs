@@ -38,26 +38,37 @@ namespace DINONUGGY.Sprites
         public void Update(double deltaTime, List<Objetos> gameObjects)
         {
             isMidair = true;
+            KeyboardState kState = Keyboard.GetState();
+            bool isMovementKeyPressed = false;
+
             Gravity(deltaTime);
             HandleCollision(gameObjects);
-            KeyboardState kState = Keyboard.GetState();
 
-            if ((kState.IsKeyDown(Keys.A)) || (kState.IsKeyDown(Keys.Left)))
+            if (kState.IsKeyDown(Keys.A) || kState.IsKeyDown(Keys.Left)) 
             {
-                velocity.X -= speed;        
+                velocity.X -= speed;
+                isMovementKeyPressed = true;
             }
-            if ((kState.IsKeyDown(Keys.D)) || (kState.IsKeyDown(Keys.Right)))
+            if (kState.IsKeyDown(Keys.D) || kState.IsKeyDown(Keys.Right))
             {
                 velocity.X += speed;
+                isMovementKeyPressed = true;
             }
-            if ((kState.IsKeyDown(Keys.Space)))
+            if (kState.IsKeyDown(Keys.Space))
             {
                 Jump();
+                isMovementKeyPressed = true;
             }
+
+            if (!isMovementKeyPressed)
+            {
+                velocity.X = 0;
+            }
+
             position += velocity * (float)deltaTime;
         }
-          
-        
+
+
 
         public override void Draw(SpriteBatch spriteBatch)
         {

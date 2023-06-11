@@ -22,8 +22,6 @@ namespace DINONUGGY
         Donuts donut;
         List<Objetos> objetos = new List<Objetos>();
         Camera cam;
-        Texture2D texture;
-
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -45,7 +43,7 @@ namespace DINONUGGY
         {
             
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            ground = new Ground(Content.Load<Texture2D>("Ground"), new Vector2(0, screenHeight-100),100, screenWidth);
+            ground = new Ground(Content.Load<Texture2D>("Ground"), new Vector2(0, screenHeight-100),100, screenWidth*2);
             player = new Player(Content.Load<Texture2D>("NUGGY"), new Vector2(screenWidth/ 4 - 35, screenHeight / 2 - 35));
             homer = new Homer(Content.Load<Texture2D>("HOMER"), new Vector2(screenWidth / 2 + 35, screenHeight / 2 +35));
             donut = new Donuts(Content.Load<Texture2D>("DONUT"), new Vector2(screenWidth / 2 + 50, screenHeight / 6));
@@ -69,7 +67,7 @@ namespace DINONUGGY
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            spriteBatch.Begin();
+            spriteBatch.Begin(transformMatrix: cam.Transform);
             ground.Draw(spriteBatch);
             player.Draw(spriteBatch);
             donut.Draw(spriteBatch);
