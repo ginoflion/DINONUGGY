@@ -19,7 +19,6 @@ namespace DINONUGGY.Sprites
         public bool  isDead, isMidair, isColliding;
         public int hp;
 
-
         public override Rectangle HitBox
         {
             get => new Rectangle((int)position.X, (int)position.Y, height+10, width);
@@ -36,13 +35,13 @@ namespace DINONUGGY.Sprites
         }
 
 
-        public void Update(double deltaTime, List<Objetos> gameObjects)
+        public void Update(double deltaTime, List<Objetos> gameObjects,List<Homer>homers)
         {
             isMidair = true;
             KeyboardState kState = Keyboard.GetState();
             bool isKeyPressed=false;
             Gravity(deltaTime);
-            HandleCollision(gameObjects);
+            HandleCollision(gameObjects,homers);
 
             if (kState.IsKeyDown(Keys.A) || kState.IsKeyDown(Keys.Left)) 
             {
@@ -84,7 +83,7 @@ namespace DINONUGGY.Sprites
 
 
        
-        public void HandleCollision(List<Objetos> gameObjects)
+        public void HandleCollision(List<Objetos> gameObjects, List<Homer> homers)
         {
             List<Objetos> objectsToRemove = new List<Objetos>();
             foreach (Objetos gameObject in gameObjects)
@@ -118,16 +117,23 @@ namespace DINONUGGY.Sprites
                         }
                     }
 
+                   
+                }
+               
+            }
+            foreach (Objetos gameObject in homers)
+            {
+                if (CheckCollision(gameObject))
+                {
                     if (gameObject is Homer && !isColliding)
                     {
                         isColliding = true;
-                        velocity.X -= 30;
                         hp = hp - 25;
                         Sounds.damage.Play(volume: 0.3f, pitch: 0.0f, pan: 0.0f);
                         objectsToRemove.Add(gameObject);
                     }
+                    
                 }
-               
             }
             foreach (Objetos objToRemove in objectsToRemove)
             {

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System;
 using DINONUGGY.Sprites;
+using DINONUGGY.ScoreManager;
 
 namespace DINONUGGY
 {
@@ -18,7 +19,8 @@ namespace DINONUGGY
         Ground ground;
         Homer homer;
         Donuts donut;
-        List<Objetos> objetos = new List<Objetos>();
+        public static List<Objetos> objetos = new List<Objetos>();
+        public static List<Homer> listaHomers = new List<Homer>();
         Camera cam;
         private TimeSpan gameTimeElapsed;
         private SpriteFont _font;
@@ -36,6 +38,7 @@ namespace DINONUGGY
             _graphics.PreferredBackBufferWidth = screenWidth; 
             _graphics.ApplyChanges();
 
+
             ScoreManager.ScoreManager.StartGame();
             cam = new Camera();
             base.Initialize();
@@ -48,28 +51,42 @@ namespace DINONUGGY
             spriteBatchUI= new SpriteBatch(GraphicsDevice);
             ground = new Ground(Content.Load<Texture2D>("Ground"), new Vector2(0, screenHeight-100),100, screenWidth*2);
             player = new Player(Content.Load<Texture2D>("NUGGY"), new Vector2(screenWidth/ 4 - 35, screenHeight / 2 - 35));
-            homer = new Homer(Content.Load<Texture2D>("HOMER"), new Vector2(screenWidth / 2 + 35, screenHeight / 2 +35));
+            homer = new Homer(Content.Load<Texture2D>("HOMER"), new Vector2(screenWidth * 2 , screenHeight -180));
             donut = new Donuts(Content.Load<Texture2D>("DONUT"), new Vector2(screenWidth -300, 0));
             _font = Content.Load<SpriteFont>("Fonte");
             Sounds.LoadSounds(Content);
-            objetos.Add(homer);
+            listaHomers.Add(homer);
             objetos.Add(ground);
+          
             
         }
 
-        
+
 
         protected override void Update(GameTime gameTime)
         {
             double deltaTime = gameTime.ElapsedGameTime.TotalSeconds;
             gameTimeElapsed += gameTime.ElapsedGameTime;
-            player.Update(deltaTime,objetos);
-            homer.Update(deltaTime);
+
+            player.Update(deltaTime, objetos,listaHomers);
+
+            for (int i = listaHomers.Count - 1; i >= 0; i--)
+            {
+                Homer homer = listaHomers[i];
+                homer.Update(deltaTime);
+
+               
+                if (homer.position.X < -homer.width)
+                {
+                    listaHomers.RemoveAt(i);
+                }
+            }
+
             ScoreManager.ScoreManager.UpdateScore(gameTime);
             cam.Follow(player);
             base.Update(gameTime);
-            
         }
+
 
         protected override void Draw(GameTime gameTime)
         {
@@ -77,22 +94,22 @@ namespace DINONUGGY
             spriteBatchPlayer.Begin(transformMatrix: cam.Transform);
             spriteBatchUI.Begin();
             spriteBatchUI.DrawString(_font, "HP:" + player.hp , new Vector2(10, 50), Color.White);
-            spriteBatchUI.DrawString(_font,   ScoreManager.ScoreManager.Score.ToString(), new Vector2(screenWidth-220,20), Color.White);
+            spriteBatchUI.DrawString(_font, ScoreManager.ScoreManager.Score.ToString(), new Vector2(screenWidth-220,20), Color.White);
             spriteBatchUI.DrawString(_font, "Tempo de Jogo:" + gameTimeElapsed.TotalSeconds.ToString("0.00")  +  " segundos", new Vector2(10,10), Color.White);
             ground.Draw(spriteBatchPlayer);
+            foreach(var item in listaHomers)
+            {
+                item.Draw(spriteBatchPlayer);
+            }
             player.Draw(spriteBatchPlayer);
             donut.Draw(spriteBatchUI);
-            homer.Draw(spriteBatchPlayer);
+            
            
 
             spriteBatchPlayer.End();
             spriteBatchUI.End();
             base.Draw(gameTime);
         }
-
-        
-
-       
 
         
     }
