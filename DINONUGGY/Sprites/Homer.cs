@@ -12,7 +12,7 @@ namespace DINONUGGY.Sprites
     {
         public float speed;
         private float spawnTimer;
-        private float spawnInterval = 7.0f;
+        private float spawnInterval = 3.0f;
         public int damage;
         public bool isCollided = false;
         public override Rectangle HitBox => new Rectangle((int)position.X, (int)position.Y, width, height);
@@ -24,7 +24,7 @@ namespace DINONUGGY.Sprites
             this.active = active;
             height = 80;
             width = 80;
-            speed = 100;
+            speed = 225;
             this.damage = damage;
             spawnTimer = spawnInterval;
         }
@@ -41,7 +41,7 @@ namespace DINONUGGY.Sprites
 
             spawnTimer -= (float)deltaTime;
 
-            if (spawnTimer <= 0)
+            if (spawnTimer <= 0 )
             {
                 SpawnHomer();
                 spawnTimer = spawnInterval;
@@ -50,16 +50,20 @@ namespace DINONUGGY.Sprites
 
         private void SpawnHomer()
         {
-            
-                Homer newHomer = new Homer(texture, new Vector2(Game1.screenWidth * 2, Game1.screenHeight - 180), true, damage);
-                Game1.listaHomers.Add(newHomer);
-            
+            if (Game1.listaHomers.Any(homer => homer.position == new Vector2(Game1.screenWidth * 2, Game1.screenHeight - 180)))
+            {
+                return; 
+            }
+            Homer newHomer = new Homer(texture, new Vector2(Game1.screenWidth * 2, Game1.screenHeight - 180), true, damage);
+            Game1.listaHomers.Add(newHomer);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, HitBox, Color.White);
+         
         }
+       
     }
 
 }

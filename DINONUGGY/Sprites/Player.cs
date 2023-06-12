@@ -27,7 +27,7 @@ namespace DINONUGGY.Sprites
         public Player(Texture2D texture, Vector2 position ) : base(texture, position,true)
         {
             speed = 150;
-            gravity = 150;
+            gravity = 190;
             isDead  = false;
             isCollided = false;
             hp = 100;
@@ -126,13 +126,14 @@ namespace DINONUGGY.Sprites
             {
                 if (CheckCollision(homer) && !homer.isCollided)
                 {
-                    hp -= 100;
+                    hp -= 25;
                     Sounds.damage.Play(volume: 0.3f, pitch: 0.0f, pan: 0.0f);
                     collidedHomers.Add(homer);
-                    homer.isCollided = true;                  
+                    homer.isCollided = true;
                     homer.active = false;
                 }
             }
+        
 
             foreach (Homer collidedHomer in collidedHomers)
             {
@@ -143,10 +144,11 @@ namespace DINONUGGY.Sprites
             {
                 isCollided = false;
             }
-
-
+            
 
         }
+
+       
 
 
         public void Die()

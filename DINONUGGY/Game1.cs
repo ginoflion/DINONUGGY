@@ -39,7 +39,7 @@ namespace DINONUGGY
             _graphics.PreferredBackBufferHeight = screenHeight; 
             _graphics.PreferredBackBufferWidth = screenWidth; 
             _graphics.ApplyChanges();
-
+            
 
             ScoreManager.ScoreManager.StartGame();
             cam = new Camera();
@@ -69,12 +69,11 @@ namespace DINONUGGY
         {
             if (player.isDead)
             {
-                // Se o jogador está morto, pause o tempo
+                
                 isTimePaused = true;
             }
             if (!isTimePaused)
             {
-                
                 gameTimeElapsed += gameTime.ElapsedGameTime;
             }
             double deltaTime = gameTime.ElapsedGameTime.TotalSeconds;

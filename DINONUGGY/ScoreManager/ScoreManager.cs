@@ -53,7 +53,6 @@ namespace DINONUGGY.ScoreManager
             {
             if (player.isDead)
             {
-                // Se o jogador está morto, não atualize o score
                 return;
             }
 
