@@ -56,6 +56,7 @@ namespace DINONUGGY.Sprites
             {
                 if (HitBox.Intersects(homer.HitBox))
                 {
+                    Sounds.homerHit.Play(volume: 0.3f, pitch: 0.0f, pan: 0.0f);
                     isActive = false;
                     break;
                 }

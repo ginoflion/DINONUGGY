@@ -10,14 +10,15 @@ namespace DINONUGGY
 {
     public static class Sounds
     {
-        public static SoundEffect death,damage;
-        public static SoundEffect jump;
+        public static SoundEffect death,damage,jump, margeHit, homerHit;
+        
 
         public static void LoadSounds(ContentManager Content)
         {
             death = Content.Load<SoundEffect>("death");
             damage = Content.Load<SoundEffect>("damage");
-
+            jump = Content.Load<SoundEffect>("Jump");
+            homerHit= Content.Load<SoundEffect>("Boring");
         }
     }
 }

@@ -12,17 +12,17 @@ namespace DINONUGGY.Sprites
     {
         public float speed;
         private float spawnTimer;
-        private float spawnInterval = 3.0f;
+        private float spawnInterval = 2.5f;
         public int damage;
         public bool isCollided = false;
-        public override Rectangle HitBox => new Rectangle((int)position.X, (int)position.Y, width, height);
+        public override Rectangle HitBox => new Rectangle((int)position.X, (int)position.Y, width, height-10);
 
         public Homer(Texture2D texture, Vector2 position, bool active, int damage) : base(texture, position, active)
         {
             this.texture = texture;
             this.position = position;
             this.active = active;
-            height = 80;
+            height = 90;
             width = 80;
             speed = 225;
             this.damage = damage;

@@ -45,16 +45,14 @@ namespace DINONUGGY.Sprites
         }
 
 
-        public void Update(double deltaTime, List<Objetos> gameObjects,List<Homer>homers,List<Marge>marges)
+        public void Update(double deltaTime, List<Objetos> gameObjects, List<Homer> homers, List<Marge> marges)
         {
             isMidair = true;
             Gravity(deltaTime);
-            HandleCollision(gameObjects,homers,marges);
+            HandleCollision(gameObjects, homers, marges);
             Movement(deltaTime);
-            
+
         }
-
-
 
         public override void Draw(SpriteBatch spriteBatch)
         {
@@ -194,12 +192,12 @@ namespace DINONUGGY.Sprites
 
         public void Die()
         {
-        
-                speed = 0;
-                isDead = true;
-                Sounds.death.Play(volume: 0.3f, pitch: 0.0f, pan: 0.0f);
-                Jump();
-                
+
+            Sounds.death.Play(volume: 0.1f, pitch: 0.0f, pan: 0.0f);
+            speed = 0;
+            isDead = true;
+            JumpNoSound();
+               
         }
 
         public void Gravity(double deltaTime) {
@@ -212,6 +210,17 @@ namespace DINONUGGY.Sprites
         {
             if (!isMidair)
             {
+                Sounds.jump.Play(volume: 0.05f, pitch: 0.0f, pan: 0.0f);
+                velocity.Y -= 200;
+                isMidair = true;
+            }
+
+        }
+        private void JumpNoSound()
+        {
+            if (!isMidair)
+            {
+                
                 velocity.Y -= 200;
                 isMidair = true;
             }

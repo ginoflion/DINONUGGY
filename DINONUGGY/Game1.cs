@@ -69,7 +69,6 @@ namespace DINONUGGY
             listaHomers.Add(homer);
             objetos.Add(ground);
             listaMarge.Add(marge);
-            //bullets.Add(bullet);
             
         }
 
@@ -114,7 +113,16 @@ namespace DINONUGGY
            
             player.UpdateInput(bullets,gameTime);
             player.Update(deltaTime, objetos, listaHomers,listaMarge);
-            bullet.position = player.position;
+            if (!player.isDead)
+            {
+                if (player.position.Y > screenHeight)
+                {
+                    player.hp = 0;
+                    player.Die();
+                }
+            }
+            
+                bullet.position = player.position;
             foreach (Bullet bullet in bullets)
             {
                 bullet.Update(gameTime, listaMarge,listaHomers); 

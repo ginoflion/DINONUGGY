@@ -13,7 +13,7 @@ namespace DINONUGGY.Sprites
     {
         public float speed;
         private float spawnTimer;
-        private float spawnInterval = 4.0f;
+        private float spawnInterval = 3.0f;
         public int damage;
         public bool isCollided = false;
 
@@ -26,7 +26,7 @@ namespace DINONUGGY.Sprites
             this.active = active;
             height = 120;
             width = 120;
-            speed = 150;
+            speed = 180;
             this.damage = damage;
             spawnTimer = spawnInterval;
         }
