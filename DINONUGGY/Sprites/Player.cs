@@ -85,6 +85,7 @@ namespace DINONUGGY.Sprites
 
         public void HandleCollision(List<Objetos> gameObjects, List<Homer> homers)
         {
+            if (isDead == true) return;
             foreach (Objetos gameObject in gameObjects)
             {
                 if (CheckCollision(gameObject))
@@ -157,6 +158,7 @@ namespace DINONUGGY.Sprites
                 speed = 0;
                 isDead = true;
                 Sounds.death.Play(volume: 0.3f, pitch: 0.0f, pan: 0.0f);
+                Jump();
                 
         }
 
