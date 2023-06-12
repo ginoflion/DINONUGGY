@@ -34,13 +34,13 @@ namespace DINONUGGY.Sprites
         }
 
 
-        public void Update(double deltaTime, List<Objetos> gameObjects,List<Homer>homers)
+        public void Update(double deltaTime, List<Objetos> gameObjects,List<Homer>homers,List<Marge>marges)
         {
             isMidair = true;
             KeyboardState kState = Keyboard.GetState();
             bool isKeyPressed=false;
             Gravity(deltaTime);
-            HandleCollision(gameObjects,homers);
+            HandleCollision(gameObjects,homers,marges);
 
             if (kState.IsKeyDown(Keys.A) || kState.IsKeyDown(Keys.Left)) 
             {
@@ -83,7 +83,7 @@ namespace DINONUGGY.Sprites
 
 
 
-        public void HandleCollision(List<Objetos> gameObjects, List<Homer> homers)
+        public void HandleCollision(List<Objetos> gameObjects, List<Homer> homers,List<Marge> marges)
         {
             if (isDead == true) return;
             foreach (Objetos gameObject in gameObjects)
@@ -122,6 +122,7 @@ namespace DINONUGGY.Sprites
 
             }
             List<Homer> collidedHomers = new List<Homer>();
+            List<Marge> collidedMarge = new List<Marge>();
 
             foreach (Homer homer in homers)
             {
@@ -134,13 +135,31 @@ namespace DINONUGGY.Sprites
                     homer.active = false;
                 }
             }
-        
+            foreach (Marge marge in marges)
+            {
+                if (CheckCollision(marge) && !marge.isCollided)
+                {
+                    hp -= 50;
+                    Sounds.damage.Play(volume: 0.3f, pitch: 0.0f, pan: 0.0f);
+                    collidedMarge.Add(marge);
+                    marge.isCollided = true;
+                    marge.active = false;
+                }
+            }
+            
 
+            foreach (Marge marge in collidedMarge)
+            {
+                marges.Remove(marge);
+            }
             foreach (Homer collidedHomer in collidedHomers)
             {
                 homers.Remove(collidedHomer);
             }
-
+            if (marges.All(marge => marge.isCollided))
+            {
+                isCollided = false;
+            }
             if (homers.All(homer => homer.isCollided))
             {
                 isCollided = false;

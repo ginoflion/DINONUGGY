@@ -12,35 +12,11 @@ namespace DINONUGGY.ScoreManager
 {
     public static class ScoreManager
     {
-        public static int HighScore { get; private set; }
         public static int Score { get; private set; }
         private static double ScoreTimer = 0;
         private static DateTime StartTime;
 
 
-        private static string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "DINONUGGY");
-
-        public static void InitializeHighScore()
-        {
-            Directory.CreateDirectory(path);
-            if (File.Exists(Path.Combine(path, "score.txt")))
-            {
-                try
-                {
-                    HighScore = int.Parse(File.ReadLines(Path.Combine(path, "score.txt")).First());
-                }
-                catch
-                {
-                    HighScore = 0;
-                }
-            }
-            else
-            {
-                var file = File.Create(Path.Combine(path, "score.txt"));
-                file.Close();
-                HighScore = 0;
-            }
-        }
 
         public static void StartGame()
         {
@@ -70,15 +46,7 @@ namespace DINONUGGY.ScoreManager
 
 
 
-        public static int SetHighScore()
-        {
-            if (Score > HighScore)
-            {
-                File.WriteAllText(Path.Combine(path, "score.txt"), Score.ToString());
-                HighScore = Score;
-            }
-            return HighScore;
-        }
+   
     }
 
 

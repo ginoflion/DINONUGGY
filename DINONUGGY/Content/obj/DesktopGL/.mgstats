@@ -1,2 +1,3 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"C:/Users/gonca/Desktop/PROJETOOO/DINONUGGY/DINONUGGY/Content/damage.wav","C:/Users/gonca/Desktop/PROJETOOO/DINONUGGY/DINONUGGY/Content/bin/DesktopGL/damage.xnb","SoundEffectProcessor","SoundEffectContent",162966,162833,0,8307236
+"C:/Users/gonca/Desktop/PROJETOOO/DINONUGGY/DINONUGGY/Content/damage.wav","C:/Users/gonca/Desktop/PROJETOOO/DINONUGGY/DINONUGGY/Content/bin/DesktopGL/damage.xnb","SoundEffectProcessor","SoundEffectContent",390310,390201,3,4087822
+"C:/Users/gonca/Desktop/PROJETOOO/DINONUGGY/DINONUGGY/Content/MARGE.png","C:/Users/gonca/Desktop/PROJETOOO/DINONUGGY/DINONUGGY/Content/bin/DesktopGL/MARGE.xnb","TextureProcessor","Texture2DContent",11826,1440085,0,4705928

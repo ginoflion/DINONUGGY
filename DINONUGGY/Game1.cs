@@ -19,8 +19,10 @@ namespace DINONUGGY
         Ground ground;
         Homer homer;
         Donuts donut;
+        Marge marge;
         public static List<Objetos> objetos = new List<Objetos>();
         public static List<Homer> listaHomers = new List<Homer>();
+        public static List<Marge>listaMarge = new List<Marge>();
         Camera cam;
         private TimeSpan gameTimeElapsed;
         private SpriteFont _font;
@@ -54,12 +56,13 @@ namespace DINONUGGY
             ground = new Ground(Content.Load<Texture2D>("Ground"), new Vector2(0, screenHeight-100),100, screenWidth*2);
             player = new Player(Content.Load<Texture2D>("NUGGY"), new Vector2(screenWidth/ 4 - 35, screenHeight / 2 - 35));
             homer = new Homer(Content.Load<Texture2D>("HOMER"), new Vector2(screenWidth * 2 , screenHeight -180), true, 25);
+            marge = new Marge(Content.Load<Texture2D>("MARGE"), new Vector2(screenWidth * 2, screenHeight - 200), true, 50);
             donut = new Donuts(Content.Load<Texture2D>("DONUT"), new Vector2(screenWidth -300, 0));
             _font = Content.Load<SpriteFont>("Fonte");
             Sounds.LoadSounds(Content);
             listaHomers.Add(homer);
             objetos.Add(ground);
-          
+            listaMarge.Add(marge);
             
         }
 
@@ -89,7 +92,18 @@ namespace DINONUGGY
                     listaHomers.RemoveAt(i);
                 }
             }
-            player.Update(deltaTime, objetos, listaHomers);
+            for (int i = listaMarge.Count - 1; i >= 0; i--)
+            {
+                Marge marge = listaMarge[i];
+                marge.Update(deltaTime, player);
+
+
+                if (marge.position.X < -marge.width)
+                {
+                    listaMarge.RemoveAt(i);
+                }
+            }
+            player.Update(deltaTime, objetos, listaHomers,listaMarge);
 
             ScoreManager.ScoreManager.UpdateScore(gameTime,player);
             cam.Follow(player);
@@ -108,6 +122,13 @@ namespace DINONUGGY
             spriteBatchUI.DrawString(_font, "Tempo de Jogo:" + gameTimeElapsed.TotalSeconds.ToString("0.00")  +  " segundos", new Vector2(10,10), Color.White);
             ground.Draw(spriteBatchPlayer);
             foreach(Homer item in listaHomers)
+            {
+                if (item.active == true)
+                {
+                    item.Draw(spriteBatchPlayer);
+                }
+            }
+            foreach (Marge item in listaMarge)
             {
                 if (item.active == true)
                 {
