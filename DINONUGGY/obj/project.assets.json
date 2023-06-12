@@ -102,19 +102,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Miguel\\.nuget\\packages\\": {}
+    "C:\\Users\\gonca\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Miguel\\Source\\Repos\\DINONUGGY\\DINONUGGY\\DINONUGGY.csproj",
+      "projectUniqueName": "C:\\Users\\gonca\\Desktop\\PROJETOOO\\DINONUGGY\\DINONUGGY\\DINONUGGY.csproj",
       "projectName": "DINONUGGY",
-      "projectPath": "C:\\Users\\Miguel\\Source\\Repos\\DINONUGGY\\DINONUGGY\\DINONUGGY.csproj",
-      "packagesPath": "C:\\Users\\Miguel\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Miguel\\Source\\Repos\\DINONUGGY\\DINONUGGY\\obj\\",
+      "projectPath": "C:\\Users\\gonca\\Desktop\\PROJETOOO\\DINONUGGY\\DINONUGGY\\DINONUGGY.csproj",
+      "packagesPath": "C:\\Users\\gonca\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\gonca\\Desktop\\PROJETOOO\\DINONUGGY\\DINONUGGY\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Miguel\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\gonca\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -165,7 +165,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.200\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
       }
     }
   }

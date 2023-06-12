@@ -16,9 +16,8 @@ namespace DINONUGGY.Sprites
     public class Player : Objetos
     {
         float speed, gravity;
-        public bool  isDead, isMidair, isColliding;
+        public bool  isDead, isMidair;
         public int hp;
-
         public override Rectangle HitBox
         {
             get => new Rectangle((int)position.X, (int)position.Y, height+10, width);
@@ -31,7 +30,6 @@ namespace DINONUGGY.Sprites
             speed = 150;
             gravity = 150;
             isDead  = false;
-            
         }
 
 
@@ -68,6 +66,7 @@ namespace DINONUGGY.Sprites
             if (hp <= 0)
             {
                 Die();
+                
             }
            
             position += velocity* (float)deltaTime;
@@ -86,6 +85,7 @@ namespace DINONUGGY.Sprites
         public void HandleCollision(List<Objetos> gameObjects, List<Homer> homers)
         {
             List<Objetos> objectsToRemove = new List<Objetos>();
+            List<Homer> collidedHomers = new List<Homer>();
             foreach (Objetos gameObject in gameObjects)
             {
                 if (CheckCollision(gameObject))
@@ -121,21 +121,20 @@ namespace DINONUGGY.Sprites
                 }
                
             }
-            foreach (Objetos gameObject in homers)
+            foreach (Homer homer in homers)
             {
-                if (CheckCollision(gameObject))
+                if (CheckCollision(homer) && !homer.isCollided )
                 {
-                    if (gameObject is Homer && !isColliding)
-                    {
-                        isColliding = true;
-                        hp = hp - 25;
-                        Sounds.damage.Play(volume: 0.3f, pitch: 0.0f, pan: 0.0f);
-                        objectsToRemove.Add(gameObject);
-                        gameObject.active=false;
-                    }
-                    
+                    hp -= homer.damage;
+                    Sounds.damage.Play(volume: 0.3f, pitch: 0.0f, pan: 0.0f);
+                    homer.isCollided = true;
+                   
+                    objectsToRemove.Add(homer);
+                    homer.active = false;
                 }
             }
+            
+
             foreach (Objetos objToRemove in objectsToRemove)
             {
                 gameObjects.Remove(objToRemove);

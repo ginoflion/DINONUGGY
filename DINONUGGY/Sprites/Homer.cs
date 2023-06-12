@@ -12,11 +12,13 @@ namespace DINONUGGY.Sprites
     {
         public float speed;
         private float spawnTimer;
-        private float spawnInterval = 10.0f;
-        private const int MaxHomers = 5;
+        private float spawnInterval = 7.0f;
+        private const int MaxHomers = 7;
+        public int damage;
+        public bool isCollided = false;
         public override Rectangle HitBox => new Rectangle((int)position.X, (int)position.Y, width, height);
 
-        public Homer(Texture2D texture, Vector2 position, bool active) : base(texture, position, active)
+        public Homer(Texture2D texture, Vector2 position, bool active, int damage) : base(texture, position, active)
         {
             this.texture = texture;
             this.position = position;
@@ -24,6 +26,7 @@ namespace DINONUGGY.Sprites
             height = 80;
             width = 80;
             speed = 60;
+            this.damage = 25;
             spawnTimer = spawnInterval;
         }
 
@@ -47,7 +50,7 @@ namespace DINONUGGY.Sprites
         {
             if (Game1.listaHomers.Count < MaxHomers)
             {
-                Homer newHomer = new Homer(texture, new Vector2(Game1.screenWidth * 2, Game1.screenHeight - 180), true);
+                Homer newHomer = new Homer(texture, new Vector2(Game1.screenWidth * 2, Game1.screenHeight - 180), true, damage);
                 Game1.listaHomers.Add(newHomer);
             }
         }

@@ -51,7 +51,7 @@ namespace DINONUGGY
             spriteBatchUI= new SpriteBatch(GraphicsDevice);
             ground = new Ground(Content.Load<Texture2D>("Ground"), new Vector2(0, screenHeight-100),100, screenWidth*2);
             player = new Player(Content.Load<Texture2D>("NUGGY"), new Vector2(screenWidth/ 4 - 35, screenHeight / 2 - 35));
-            homer = new Homer(Content.Load<Texture2D>("HOMER"), new Vector2(screenWidth * 2 , screenHeight -180), true);
+            homer = new Homer(Content.Load<Texture2D>("HOMER"), new Vector2(screenWidth * 2 , screenHeight -180), true, 25);
             donut = new Donuts(Content.Load<Texture2D>("DONUT"), new Vector2(screenWidth -300, 0));
             _font = Content.Load<SpriteFont>("Fonte");
             Sounds.LoadSounds(Content);
