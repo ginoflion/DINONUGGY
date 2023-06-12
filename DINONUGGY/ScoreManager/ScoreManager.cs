@@ -1,8 +1,10 @@
-﻿using Microsoft.Xna.Framework;
+﻿using DINONUGGY.Sprites;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,6 +16,7 @@ namespace DINONUGGY.ScoreManager
         public static int Score { get; private set; }
         private static double ScoreTimer = 0;
         private static DateTime StartTime;
+
 
         private static string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "DINONUGGY");
 
@@ -46,17 +49,27 @@ namespace DINONUGGY.ScoreManager
             ScoreTimer = 0;
         }
 
-        public static void UpdateScore(GameTime gameTime)
-        {
+        public static void UpdateScore(GameTime gameTime,Player player)
+            {
+            if (player.isDead)
+            {
+                // Se o jogador está morto, não atualize o score
+                return;
+            }
+
+
             double elapsedSeconds = (DateTime.Now - StartTime).TotalSeconds;
             ScoreTimer += gameTime.ElapsedGameTime.TotalMilliseconds;
 
             if (ScoreTimer >= 1)
             {
-                Score = (int)(elapsedSeconds * 7); 
+                Score = (int)(elapsedSeconds * 7);
                 ScoreTimer = 0;
             }
         }
+
+
+
 
         public static int SetHighScore()
         {

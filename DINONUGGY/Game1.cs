@@ -24,7 +24,9 @@ namespace DINONUGGY
         Camera cam;
         private TimeSpan gameTimeElapsed;
         private SpriteFont _font;
-        
+        bool isTimePaused = false;
+
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -65,27 +67,36 @@ namespace DINONUGGY
 
         protected override void Update(GameTime gameTime)
         {
+            if (player.isDead)
+            {
+                // Se o jogador está morto, pause o tempo
+                isTimePaused = true;
+            }
+            if (!isTimePaused)
+            {
+                
+                gameTimeElapsed += gameTime.ElapsedGameTime;
+            }
             double deltaTime = gameTime.ElapsedGameTime.TotalSeconds;
-            gameTimeElapsed += gameTime.ElapsedGameTime;
-
-            player.Update(deltaTime, objetos,listaHomers);
 
             for (int i = listaHomers.Count - 1; i >= 0; i--)
             {
                 Homer homer = listaHomers[i];
-                homer.Update(deltaTime);
+                homer.Update(deltaTime, player);
 
-               
+
                 if (homer.position.X < -homer.width)
                 {
-                    listaHomers.RemoveAt(i); 
+                    listaHomers.RemoveAt(i);
                 }
             }
+            player.Update(deltaTime, objetos, listaHomers);
 
-            ScoreManager.ScoreManager.UpdateScore(gameTime);
+            ScoreManager.ScoreManager.UpdateScore(gameTime,player);
             cam.Follow(player);
             base.Update(gameTime);
         }
+
 
 
         protected override void Draw(GameTime gameTime)

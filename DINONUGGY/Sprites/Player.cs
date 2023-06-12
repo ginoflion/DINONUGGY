@@ -26,11 +26,11 @@ namespace DINONUGGY.Sprites
         //Contructor
         public Player(Texture2D texture, Vector2 position ) : base(texture, position,true)
         {
-            hp = 100;
             speed = 150;
             gravity = 150;
             isDead  = false;
             isCollided = false;
+            hp = 100;
         }
 
 
@@ -64,7 +64,7 @@ namespace DINONUGGY.Sprites
             {
                 velocity.X = 0;
             }
-            if (hp <= 0)
+            if (hp <=0 &&  !isDead)
             {
                 Die();
                 
@@ -126,10 +126,10 @@ namespace DINONUGGY.Sprites
             {
                 if (CheckCollision(homer) && !homer.isCollided)
                 {
-                    hp -= homer.damage;
+                    hp -= 100;
                     Sounds.damage.Play(volume: 0.3f, pitch: 0.0f, pan: 0.0f);
-                    homer.isCollided = true;
                     collidedHomers.Add(homer);
+                    homer.isCollided = true;                  
                     homer.active = false;
                 }
             }
@@ -139,7 +139,7 @@ namespace DINONUGGY.Sprites
                 homers.Remove(collidedHomer);
             }
 
-            if (!homers.Any(homer => !homer.isCollided))
+            if (homers.All(homer => homer.isCollided))
             {
                 isCollided = false;
             }
@@ -155,7 +155,7 @@ namespace DINONUGGY.Sprites
                 speed = 0;
                 isDead = true;
                 Sounds.death.Play(volume: 0.3f, pitch: 0.0f, pan: 0.0f);
-
+                
         }
 
         public void Gravity(double deltaTime) {
