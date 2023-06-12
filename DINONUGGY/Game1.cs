@@ -16,7 +16,7 @@ namespace DINONUGGY
         public static int screenWidth = 1280;
         public static int screenHeight = 720;
         GraphicsDeviceManager _graphics;
-        SpriteBatch spriteBatchPlayer, spriteBatchUI;
+        SpriteBatch spriteBatchPlayer, spriteBatchUI, spriteBatchBC;
         Player player;
         Ground ground;
         Homer homer;
@@ -26,6 +26,7 @@ namespace DINONUGGY
         public static List<Objetos> objetos = new List<Objetos>();
         public static List<Homer> listaHomers = new List<Homer>();
         public static List<Marge>listaMarge = new List<Marge>();
+        Texture2D background;
 
         public static List<Bullet> bullets = new List<Bullet>();
         Camera cam;
@@ -58,12 +59,14 @@ namespace DINONUGGY
           
             spriteBatchPlayer = new SpriteBatch(GraphicsDevice);
             spriteBatchUI= new SpriteBatch(GraphicsDevice);
+            spriteBatchBC = new SpriteBatch(GraphicsDevice);
             ground = new Ground(Content.Load<Texture2D>("Ground"), new Vector2(0, screenHeight-100),100, screenWidth*2);
             player = new Player(Content.Load<Texture2D>("NUGGY"), new Vector2(screenWidth/ 4 - 35, screenHeight / 2 - 35),Content);
             homer = new Homer(Content.Load<Texture2D>("HOMER"), new Vector2(screenWidth * 2 , screenHeight -180), true, 25);
             marge = new Marge(Content.Load<Texture2D>("MARGE"), new Vector2(screenWidth * 2, screenHeight - 220), true, 50);
             donut = new Donuts(Content.Load<Texture2D>("DONUT"), new Vector2(screenWidth -300, 0));
-            bullet = new Bullet(Content.Load<Texture2D>("BULLET"), Vector2.Zero,5,10); 
+            bullet = new Bullet(Content.Load<Texture2D>("BULLET"), Vector2.Zero,5,10);
+            background = Content.Load<Texture2D>("Background");
             _font = Content.Load<SpriteFont>("Fonte");
             Sounds.LoadSounds(Content);
             listaHomers.Add(homer);
@@ -138,7 +141,8 @@ namespace DINONUGGY
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            spriteBatchBC.Begin();
+            spriteBatchBC.Draw(background,new Rectangle(0,0,screenWidth,screenHeight), Color.White);
             spriteBatchPlayer.Begin(transformMatrix: cam.Transform);
             spriteBatchUI.Begin();
             spriteBatchUI.DrawString(_font, "HP:" + player.hp , new Vector2(10, 50), Color.White);
@@ -167,7 +171,7 @@ namespace DINONUGGY
             donut.Draw(spriteBatchUI);
             
            
-
+            spriteBatchBC.End();
             spriteBatchPlayer.End();
             spriteBatchUI.End();
             base.Draw(gameTime);

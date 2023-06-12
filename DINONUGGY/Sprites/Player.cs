@@ -19,7 +19,6 @@ namespace DINONUGGY.Sprites
         float speed, gravity;
         public bool  isDead, isMidair, isCollided;
         public int hp,range;
-        private bool isShootKeyPressed = false;
         private bool canShoot = true; 
         private TimeSpan shootInterval = TimeSpan.FromSeconds(3); 
         private TimeSpan shootTimer = TimeSpan.Zero;
@@ -40,7 +39,7 @@ namespace DINONUGGY.Sprites
             isDead  = false;
             isCollided = false;
             hp = 100;
-            range = 50;
+            height = 50;
             this.content = content;
         }
 
@@ -228,23 +227,26 @@ namespace DINONUGGY.Sprites
         public void UpdateInput(List<Bullet> bullets, GameTime gameTime)
         {
             KeyboardState keyboardState = Keyboard.GetState();
-
-            if (keyboardState.IsKeyDown(Keys.N) && canShoot)
+            if(!isDead) 
             {
-                Shoot(bullets);
-                canShoot = false;
-                shootTimer = TimeSpan.Zero;
-            }
-
-            if (!canShoot)
-            {
-                shootTimer += gameTime.ElapsedGameTime;
-
-                if (shootTimer >= shootInterval)
+                if (keyboardState.IsKeyDown(Keys.N) && canShoot)
                 {
-                    canShoot = true;
+                    Shoot(bullets);
+                    canShoot = false;
+                    shootTimer = TimeSpan.Zero;
+                }
+
+                if (!canShoot)
+                {
+                    shootTimer += gameTime.ElapsedGameTime;
+
+                    if (shootTimer >= shootInterval)
+                    {
+                        canShoot = true;
+                    }
                 }
             }
+            
         }
 
         private void Shoot(List<Bullet> bullets)

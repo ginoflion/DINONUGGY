@@ -1,4 +1,6 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"C:/Users/gonca/Desktop/PROJETOOO/DINONUGGY/DINONUGGY/Content/BULLET.png","C:/Users/gonca/Desktop/PROJETOOO/DINONUGGY/DINONUGGY/Content/bin/DesktopGL/BULLET.xnb","TextureProcessor","Texture2DContent",8301,917589,0,2520763
-"C:/Users/gonca/Desktop/PROJETOOO/DINONUGGY/DINONUGGY/Content/HOMER.png","C:/Users/gonca/Desktop/PROJETOOO/DINONUGGY/DINONUGGY/Content/bin/DesktopGL/HOMER.xnb","TextureProcessor","Texture2DContent",59013,6889557,0,4494576
-"C:/Users/gonca/Desktop/PROJETOOO/DINONUGGY/DINONUGGY/Content/OOF.wav","C:/Users/gonca/Desktop/PROJETOOO/DINONUGGY/DINONUGGY/Content/bin/DesktopGL/OOF.xnb","SoundEffectProcessor","SoundEffectContent",327914,327785,0,8376181
+"C:/Users/gonca/Desktop/PROJETOOO/DINONUGGY/DINONUGGY/Content/Background.png","C:/Users/gonca/Desktop/PROJETOOO/DINONUGGY/DINONUGGY/Content/bin/DesktopGL/Background.xnb","TextureProcessor","Texture2DContent",461271,6348885,1,64891
+"C:/Users/gonca/Desktop/PROJETOOO/DINONUGGY/DINONUGGY/Content/Ground.png","C:/Users/gonca/Desktop/PROJETOOO/DINONUGGY/DINONUGGY/Content/bin/DesktopGL/Ground.xnb","TextureProcessor","Texture2DContent",20901,1024085,0,0832481
+"C:/Users/gonca/Desktop/PROJETOOO/DINONUGGY/DINONUGGY/Content/MARGE.png","C:/Users/gonca/Desktop/PROJETOOO/DINONUGGY/DINONUGGY/Content/bin/DesktopGL/MARGE.xnb","TextureProcessor","Texture2DContent",699,7189,0,0348867
+"C:/Users/gonca/Desktop/PROJETOOO/DINONUGGY/DINONUGGY/Content/NUGGY.png","C:/Users/gonca/Desktop/PROJETOOO/DINONUGGY/DINONUGGY/Content/bin/DesktopGL/NUGGY.xnb","TextureProcessor","Texture2DContent",1437,30005,0,0254127
+"C:/Users/gonca/Desktop/PROJETOOO/DINONUGGY/DINONUGGY/Content/OOF.wav","C:/Users/gonca/Desktop/PROJETOOO/DINONUGGY/DINONUGGY/Content/bin/DesktopGL/OOF.xnb","SoundEffectProcessor","SoundEffectContent",238738,238621,2,789897

@@ -108,3 +108,4 @@ C:\Users\gonca\Desktop\PROJETOOO\DINONUGGY\DINONUGGY\bin\Debug\net6.0\Content\BU
 C:\Users\gonca\Desktop\PROJETOOO\DINONUGGY\DINONUGGY\bin\Debug\net6.0\Content\Jump.xnb
 C:\Users\gonca\Desktop\PROJETOOO\DINONUGGY\DINONUGGY\bin\Debug\net6.0\Content\Boring.xnb
 C:\Users\gonca\Desktop\PROJETOOO\DINONUGGY\DINONUGGY\bin\Debug\net6.0\Content\OOF.xnb
+C:\Users\gonca\Desktop\PROJETOOO\DINONUGGY\DINONUGGY\bin\Debug\net6.0\Content\Background.xnb

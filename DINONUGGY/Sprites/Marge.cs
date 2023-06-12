@@ -25,7 +25,7 @@ namespace DINONUGGY.Sprites
             this.position = position;
             this.active = active;
             height = 120;
-            width = 120;
+            width = 50;
             speed = 180;
             this.damage = damage;
             spawnTimer = spawnInterval;
