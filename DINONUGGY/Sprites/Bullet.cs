@@ -63,7 +63,7 @@ namespace DINONUGGY.Sprites
                 }
             }
         }
-        public void Draw(SpriteBatch spriteBatch, Vector2 position)
+        public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, HitBox, Color.White);
         }
