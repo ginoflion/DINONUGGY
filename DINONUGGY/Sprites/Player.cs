@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -17,32 +18,57 @@ namespace DINONUGGY.Sprites
     {
         float speed, gravity;
         public bool  isDead, isMidair, isCollided;
-        public int hp;
+        public int hp,range;
+        private bool isShootKeyPressed = false;
+        private bool canShoot = true; 
+        private TimeSpan shootInterval = TimeSpan.FromSeconds(3); 
+        private TimeSpan shootTimer = TimeSpan.Zero;
+
+        private ContentManager content { get; set; }
+
+        public static List<Bullet> bullets = new List<Bullet>();
         public override Rectangle HitBox
         {
             get => new Rectangle((int)position.X, (int)position.Y, height+10, width);
         }
 
-        //Contructor
-        public Player(Texture2D texture, Vector2 position ) : base(texture, position,true)
+        
+        public Player(Texture2D texture, Vector2 position , ContentManager content) : base(texture, position,true)
         {
             speed = 150;
             gravity = 190;
             isDead  = false;
             isCollided = false;
             hp = 100;
+            range = 50;
+            this.content = content;
         }
 
 
         public void Update(double deltaTime, List<Objetos> gameObjects,List<Homer>homers,List<Marge>marges)
         {
             isMidair = true;
-            KeyboardState kState = Keyboard.GetState();
-            bool isKeyPressed=false;
             Gravity(deltaTime);
             HandleCollision(gameObjects,homers,marges);
+            Movement(deltaTime);
+            
+        }
 
-            if (kState.IsKeyDown(Keys.A) || kState.IsKeyDown(Keys.Left)) 
+
+
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+           
+            spriteBatch.Draw(texture, HitBox, Color.White);
+        }
+
+        public void Movement(double deltaTime)
+        {
+
+            bool isKeyPressed = false;
+            KeyboardState kState = Keyboard.GetState();
+            MouseState mouseState = Mouse.GetState();
+            if (kState.IsKeyDown(Keys.A) || kState.IsKeyDown(Keys.Left))
             {
                 velocity.X = -speed;
                 isKeyPressed = true;
@@ -60,28 +86,21 @@ namespace DINONUGGY.Sprites
                 isKeyPressed = true;
 
             }
-            if(!isKeyPressed)
+
+
+            if (!isKeyPressed)
             {
                 velocity.X = 0;
             }
-            if (hp <=0 &&  !isDead)
+            if (hp <= 0 && !isDead)
             {
                 Die();
-                
+
             }
-           
-            position += velocity* (float)deltaTime;
+
+            position += velocity * (float)deltaTime;
         }
-
-
-
-        public override void Draw(SpriteBatch spriteBatch)
-        {
-           
-            spriteBatch.Draw(texture, HitBox, Color.White);
-        }
-
-
+       
 
         public void HandleCollision(List<Objetos> gameObjects, List<Homer> homers,List<Marge> marges)
         {
@@ -146,6 +165,8 @@ namespace DINONUGGY.Sprites
                     marge.active = false;
                 }
             }
+
+            
             
 
             foreach (Marge marge in collidedMarge)
@@ -196,7 +217,38 @@ namespace DINONUGGY.Sprites
             }
 
         }
+        public void UpdateInput(List<Bullet> bullets, GameTime gameTime)
+        {
+            KeyboardState keyboardState = Keyboard.GetState();
 
+            if (keyboardState.IsKeyDown(Keys.N) && canShoot)
+            {
+                Shoot(bullets);
+                canShoot = false;
+                shootTimer = TimeSpan.Zero;
+            }
+
+            if (!canShoot)
+            {
+                shootTimer += gameTime.ElapsedGameTime;
+
+                if (shootTimer >= shootInterval)
+                {
+                    canShoot = true;
+                }
+            }
+        }
+
+        private void Shoot(List<Bullet> bullets)
+        {
+            Vector2 bulletPosition = new Vector2(position.X + HitBox.Width, position.Y + HitBox.Height / 2);
+            Texture2D bulletTexture = content.Load<Texture2D>("BULLET");
+
+            Bullet bullet = new Bullet(bulletTexture, bulletPosition, 5, 10);
+            bullets.Add(bullet);
+
+            canShoot = false;
+        }
 
 
     }

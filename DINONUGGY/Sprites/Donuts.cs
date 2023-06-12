@@ -20,10 +20,7 @@ namespace DINONUGGY.Sprites
             width = 80;
         }
 
-        public void Update(GameTime gameTime)
-        {
-
-        }
+        
 
         public override void Draw(SpriteBatch spriteBatch)
         {

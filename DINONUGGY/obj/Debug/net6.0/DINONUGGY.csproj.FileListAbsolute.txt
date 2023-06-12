@@ -104,3 +104,4 @@ C:\Users\Miguel\Source\Repos\DINONUGGY\DINONUGGY\bin\Debug\net6.0\Content\damage
 C:\Users\Miguel\Source\Repos\DINONUGGY\DINONUGGY\bin\Debug\net6.0\Content\death.xnb
 C:\Users\Miguel\Source\Repos\DINONUGGY\DINONUGGY\bin\Debug\net6.0\Content\Fonte.xnb
 C:\Users\gonca\Desktop\PROJETOOO\DINONUGGY\DINONUGGY\bin\Debug\net6.0\Content\MARGE.xnb
+C:\Users\gonca\Desktop\PROJETOOO\DINONUGGY\DINONUGGY\bin\Debug\net6.0\Content\BULLET.xnb

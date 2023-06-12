@@ -4,6 +4,7 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
+    <File>C:/Users/gonca/Desktop/PROJETOOO/DINONUGGY/DINONUGGY/Content/BULLET.png</File>
     <File>C:/Users/gonca/Desktop/PROJETOOO/DINONUGGY/DINONUGGY/Content/damage.wav</File>
     <File>C:/Users/gonca/Desktop/PROJETOOO/DINONUGGY/DINONUGGY/Content/death.wav</File>
     <File>C:/Users/gonca/Desktop/PROJETOOO/DINONUGGY/DINONUGGY/Content/DONUT.png</File>
@@ -14,6 +15,7 @@
     <File>C:/Users/gonca/Desktop/PROJETOOO/DINONUGGY/DINONUGGY/Content/NUGGY.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

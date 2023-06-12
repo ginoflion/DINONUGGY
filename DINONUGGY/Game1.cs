@@ -6,6 +6,8 @@ using System.Runtime.InteropServices;
 using System;
 using DINONUGGY.Sprites;
 using DINONUGGY.ScoreManager;
+using System.Text;
+using System.Linq;
 
 namespace DINONUGGY
 {
@@ -20,9 +22,12 @@ namespace DINONUGGY
         Homer homer;
         Donuts donut;
         Marge marge;
+        Bullet bullet;
         public static List<Objetos> objetos = new List<Objetos>();
         public static List<Homer> listaHomers = new List<Homer>();
         public static List<Marge>listaMarge = new List<Marge>();
+
+        public static List<Bullet> bullets = new List<Bullet>();
         Camera cam;
         private TimeSpan gameTimeElapsed;
         private SpriteFont _font;
@@ -54,15 +59,17 @@ namespace DINONUGGY
             spriteBatchPlayer = new SpriteBatch(GraphicsDevice);
             spriteBatchUI= new SpriteBatch(GraphicsDevice);
             ground = new Ground(Content.Load<Texture2D>("Ground"), new Vector2(0, screenHeight-100),100, screenWidth*2);
-            player = new Player(Content.Load<Texture2D>("NUGGY"), new Vector2(screenWidth/ 4 - 35, screenHeight / 2 - 35));
+            player = new Player(Content.Load<Texture2D>("NUGGY"), new Vector2(screenWidth/ 4 - 35, screenHeight / 2 - 35),Content);
             homer = new Homer(Content.Load<Texture2D>("HOMER"), new Vector2(screenWidth * 2 , screenHeight -180), true, 25);
-            marge = new Marge(Content.Load<Texture2D>("MARGE"), new Vector2(screenWidth * 2, screenHeight - 200), true, 50);
+            marge = new Marge(Content.Load<Texture2D>("MARGE"), new Vector2(screenWidth * 2, screenHeight - 220), true, 50);
             donut = new Donuts(Content.Load<Texture2D>("DONUT"), new Vector2(screenWidth -300, 0));
+            bullet = new Bullet(Content.Load<Texture2D>("BULLET"), Vector2.Zero,5,10); 
             _font = Content.Load<SpriteFont>("Fonte");
             Sounds.LoadSounds(Content);
             listaHomers.Add(homer);
             objetos.Add(ground);
             listaMarge.Add(marge);
+            //bullets.Add(bullet);
             
         }
 
@@ -81,6 +88,7 @@ namespace DINONUGGY
             }
             double deltaTime = gameTime.ElapsedGameTime.TotalSeconds;
 
+           
             for (int i = listaHomers.Count - 1; i >= 0; i--)
             {
                 Homer homer = listaHomers[i];
@@ -103,8 +111,16 @@ namespace DINONUGGY
                     listaMarge.RemoveAt(i);
                 }
             }
+           
+            player.UpdateInput(bullets,gameTime);
             player.Update(deltaTime, objetos, listaHomers,listaMarge);
+            bullet.position = player.position;
+            foreach (Bullet bullet in bullets)
+            {
+                bullet.Update(gameTime, listaMarge,listaHomers); 
+            }
 
+            bullets.RemoveAll(bullet => !bullet.isActive);
             ScoreManager.ScoreManager.UpdateScore(gameTime,player);
             cam.Follow(player);
             base.Update(gameTime);
@@ -134,6 +150,10 @@ namespace DINONUGGY
                 {
                     item.Draw(spriteBatchPlayer);
                 }
+            }
+            foreach (Bullet bullet in bullets)
+            {
+                bullet.Draw(spriteBatchPlayer); 
             }
             player.Draw(spriteBatchPlayer);
             donut.Draw(spriteBatchUI);
