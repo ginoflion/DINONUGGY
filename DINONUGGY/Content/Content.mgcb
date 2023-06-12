@@ -116,3 +116,9 @@
 /processorParam:TextureFormat=Color
 /build:NUGGY.png
 
+#begin OOF.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:OOF.wav
+

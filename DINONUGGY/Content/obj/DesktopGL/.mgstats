@@ -1,2 +1,4 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"C:/Users/gonca/Desktop/PROJETOOO/DINONUGGY/DINONUGGY/Content/Boring.wav","C:/Users/gonca/Desktop/PROJETOOO/DINONUGGY/DINONUGGY/Content/bin/DesktopGL/Boring.xnb","SoundEffectProcessor","SoundEffectContent",301160,301037,0,8310798
+"C:/Users/gonca/Desktop/PROJETOOO/DINONUGGY/DINONUGGY/Content/BULLET.png","C:/Users/gonca/Desktop/PROJETOOO/DINONUGGY/DINONUGGY/Content/bin/DesktopGL/BULLET.xnb","TextureProcessor","Texture2DContent",8301,917589,0,2520763
+"C:/Users/gonca/Desktop/PROJETOOO/DINONUGGY/DINONUGGY/Content/HOMER.png","C:/Users/gonca/Desktop/PROJETOOO/DINONUGGY/DINONUGGY/Content/bin/DesktopGL/HOMER.xnb","TextureProcessor","Texture2DContent",59013,6889557,0,4494576
+"C:/Users/gonca/Desktop/PROJETOOO/DINONUGGY/DINONUGGY/Content/OOF.wav","C:/Users/gonca/Desktop/PROJETOOO/DINONUGGY/DINONUGGY/Content/bin/DesktopGL/OOF.xnb","SoundEffectProcessor","SoundEffectContent",327914,327785,0,8376181

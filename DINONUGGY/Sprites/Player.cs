@@ -219,8 +219,7 @@ namespace DINONUGGY.Sprites
         private void JumpNoSound()
         {
             if (!isMidair)
-            {
-                
+            {                
                 velocity.Y -= 200;
                 isMidair = true;
             }

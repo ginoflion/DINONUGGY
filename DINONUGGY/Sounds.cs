@@ -19,6 +19,7 @@ namespace DINONUGGY
             damage = Content.Load<SoundEffect>("damage");
             jump = Content.Load<SoundEffect>("Jump");
             homerHit= Content.Load<SoundEffect>("Boring");
+            margeHit= Content.Load<SoundEffect>("OOF");
         }
     }
 }
