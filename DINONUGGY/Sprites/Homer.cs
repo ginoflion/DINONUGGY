@@ -16,10 +16,11 @@ namespace DINONUGGY.Sprites
         private const int MaxHomers = 5;
         public override Rectangle HitBox => new Rectangle((int)position.X, (int)position.Y, width, height);
 
-        public Homer(Texture2D texture, Vector2 position) : base(texture, position)
+        public Homer(Texture2D texture, Vector2 position, bool active) : base(texture, position, active)
         {
             this.texture = texture;
             this.position = position;
+            this.active = active;
             height = 80;
             width = 80;
             speed = 60;
@@ -46,7 +47,7 @@ namespace DINONUGGY.Sprites
         {
             if (Game1.listaHomers.Count < MaxHomers)
             {
-                Homer newHomer = new Homer(texture, new Vector2(Game1.screenWidth * 2, Game1.screenHeight - 180));
+                Homer newHomer = new Homer(texture, new Vector2(Game1.screenWidth * 2, Game1.screenHeight - 180), true);
                 Game1.listaHomers.Add(newHomer);
             }
         }

@@ -25,7 +25,7 @@ namespace DINONUGGY.Sprites
         }
 
         //Contructor
-        public Player(Texture2D texture, Vector2 position ) : base(texture, position)
+        public Player(Texture2D texture, Vector2 position ) : base(texture, position,true)
         {
             hp = 100;
             speed = 150;
@@ -131,6 +131,7 @@ namespace DINONUGGY.Sprites
                         hp = hp - 25;
                         Sounds.damage.Play(volume: 0.3f, pitch: 0.0f, pan: 0.0f);
                         objectsToRemove.Add(gameObject);
+                        gameObject.active=false;
                     }
                     
                 }

@@ -12,7 +12,7 @@ namespace DINONUGGY.Sprites
     {
 
         
-        public Donuts(Texture2D texture, Vector2 position):base(texture,position)
+        public Donuts(Texture2D texture, Vector2 position):base(texture,position, true)
         {
             this.texture = texture;
             this.position = position;

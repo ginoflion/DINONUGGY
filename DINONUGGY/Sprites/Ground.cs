@@ -19,7 +19,7 @@ namespace DINONUGGY.Sprites
         {
             get => new Rectangle((int)position.X, (int)position.Y, width, height);
         }
-        public Ground(Texture2D texture, Vector2 position, int height, int width) : base(texture, position)
+        public Ground(Texture2D texture, Vector2 position, int height, int width) : base(texture, position, true)
         {
             this.texture = texture;
             this.position = position;
