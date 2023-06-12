@@ -97,9 +97,9 @@ namespace DINONUGGY
             spriteBatchUI.DrawString(_font, ScoreManager.ScoreManager.Score.ToString(), new Vector2(screenWidth-220,20), Color.White);
             spriteBatchUI.DrawString(_font, "Tempo de Jogo:" + gameTimeElapsed.TotalSeconds.ToString("0.00")  +  " segundos", new Vector2(10,10), Color.White);
             ground.Draw(spriteBatchPlayer);
-            foreach(var item in listaHomers)
+            foreach(Homer item in listaHomers)
             {
-                if (homer.active == true)
+                if (item.active == true)
                 {
                     item.Draw(spriteBatchPlayer);
                 }
